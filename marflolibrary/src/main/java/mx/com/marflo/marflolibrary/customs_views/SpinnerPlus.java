@@ -11,16 +11,18 @@ import mx.com.marflo.marflolibrary.spinner_adapter.spinnersModels;
 
 /**
  * @version 1
- * @autor   Ing Alejandro Martínez Flores
+ * @author   Ing Alejandro Martínez Flores
  * @since   09/07/2018
  */
 public class SpinnerPlus extends android.support.v7.widget.AppCompatSpinner implements customView, AdapterView.OnItemSelectedListener{
     private customPropertiesMannager mannager;
     private spinnersModels model;
     private Callback callback;
+    private Context context;
 
     public SpinnerPlus(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
 
         mannager = new customPropertiesMannager(context, attrs);
 
@@ -33,8 +35,9 @@ public class SpinnerPlus extends android.support.v7.widget.AppCompatSpinner impl
 
     public SpinnerPlus(Context c, String field, String invalidMesage, boolean obligatorio){
         super(c);
+        this.context = c;
 
-        mannager = new customPropertiesMannager(field, invalidMesage, obligatorio);
+        mannager = new customPropertiesMannager(c, field, invalidMesage, obligatorio);
         if (field != null){
             this.setTag(field);
         }
@@ -109,7 +112,7 @@ public class SpinnerPlus extends android.support.v7.widget.AppCompatSpinner impl
             }
 
         }else{
-            throw new RuntimeException("Adaptador inválido, utilice SpinnerAdapter");
+            throw new RuntimeException("Adapter invlaid, use SpinnerAdapter");
         }
     }
 

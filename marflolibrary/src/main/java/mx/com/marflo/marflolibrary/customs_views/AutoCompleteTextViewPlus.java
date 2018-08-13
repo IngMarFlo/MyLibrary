@@ -12,7 +12,7 @@ import mx.com.marflo.marflolibrary.autocomplete_adapter.autocompletesModels;
 
 /**
  * Clase para personalizar el AutoCompleteTextView
- * @autor        Ing Alejandro Martínez Flores
+ * @author        Ing Alejandro Martínez Flores
  * @since        09/07/2018
  * @version      1
  */
@@ -112,7 +112,7 @@ public class AutoCompleteTextViewPlus extends android.support.v7.widget.AppCompa
             }
 
         }else{
-            throw new RuntimeException("Adaptador inválido, utilice AutocompleteAdapter");
+            throw new RuntimeException("Invalid adapter, use AutocompleteAdapter");
         }
         edt.addTextChangedListener(textWatcher);
 

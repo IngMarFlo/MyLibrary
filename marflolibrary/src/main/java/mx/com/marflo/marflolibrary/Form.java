@@ -1,7 +1,6 @@
 package mx.com.marflo.marflolibrary;
 
 import android.support.design.widget.TextInputLayout;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -29,9 +28,6 @@ import mx.com.marflo.marflolibrary.spinner_adapter.spinnersModels;
  * @version 1
  */
 public class Form {
-    private static final String UNDEFINED   = "undefined";
-    private static final String ADAPTER_NULL= "! adapter is null !";
-    private static final String OBLIGATORIO = "Campo obligatorio";
 
     public static void enabledForm(View parent, boolean enabled){
         ViewGroup group = (ViewGroup) parent;
@@ -63,7 +59,9 @@ public class Form {
                 return null;
             }
         }else{
-            Toast.makeText(parent.getContext(), "Complete el formulario", Toast.LENGTH_SHORT).show();
+            Toast.makeText(parent.getContext(),
+                    parent.getContext().getResources().getString(R.string.form_please_complete),
+                    Toast.LENGTH_SHORT).show();
             return null;
         }
     }
@@ -266,7 +264,7 @@ public class Form {
 
         private static void getAutocompleteData(AutoCompleteTextViewPlus edt, JSONObject js) throws JSONException{
             if (edt.getAdapter() == null){
-                js.accumulate(edt.getField(), ADAPTER_NULL);
+                js.accumulate(edt.getField(), "null adapter");
             }else{
                 autocompletesModels m = edt.getSelectedModel();
 
@@ -285,13 +283,13 @@ public class Form {
 
         private static void getSpinnerData(SpinnerPlus spn, JSONObject js) throws JSONException{
             if (spn.getAdapter() == null){
-                js.accumulate(spn.getField(), ADAPTER_NULL);
+                js.accumulate(spn.getField(), "null adapter");
             }else {
                 spinnersModels m = spn.getModel();
                 if (m != null) {
                     js.accumulate(spn.getField(), m.getId());
                 } else {
-                    js.accumulate(spn.getField(), UNDEFINED);
+                    js.accumulate(spn.getField(), "undefined");
                 }
             }
         }
@@ -320,7 +318,7 @@ public class Form {
 
                 if (edt.getText().toString().isEmpty()){
                     if (til != null){
-                        til.setError((edt.getInvalidMessage()==null) ? OBLIGATORIO : edt.getInvalidMessage());
+                        til.setError((edt.getInvalidMessage()==null) ? edt.getContext().getResources().getString(R.string.form_mandatory) : edt.getInvalidMessage());
                     }
                     return true;
                 }else{
@@ -344,7 +342,7 @@ public class Form {
                     return false;
                 }else{
                     if (til != null){
-                        til.setError((edt.getInvalidMessage()==null) ? "Seleccione del listado" : edt.getInvalidMessage());
+                        til.setError((edt.getInvalidMessage()==null) ? edt.getContext().getResources().getString(R.string.form_choose_from_list) : edt.getInvalidMessage());
                     }
                     return true;
                 }
@@ -364,20 +362,16 @@ public class Form {
             if (spn.isObligatorio()){
 
                 if (!spn.hasObligatoryItem()){
-                    throw new RuntimeException("SpinnerPlus no cuenta con id=-1 en la posición 0");
+                    throw new RuntimeException("SpinnerPlus without id=-1 at 0 position");
                 }
 
                 spinnersModels m = spn.getModel();
                 if (m != null) {
 
-                    if (m.isSelectionValid()) {
-                        return false;
-                    }else {
-                        return true;
-                    }
+                    return !m.isSelectionValid();
 
                 } else {
-                    throw new RuntimeException("SpinnerPlus sin adaptador o items");
+                    throw new RuntimeException("SpinnerPlus without or items");
                 }
 
             }else {
@@ -397,19 +391,19 @@ public class Form {
 
     private static class set{
 
-        public static void EditText(EditTextPlus edt,String t){
+        static void EditText(EditTextPlus edt, String t){
             edt.setText(t);
         }
 
-        public static void AutoCompleteTextView(AutoCompleteTextViewPlus edt, int id){
+        static void AutoCompleteTextView(AutoCompleteTextViewPlus edt, int id){
             edt.setTextById(id);
         }
 
-        public static void Spinner(SpinnerPlus spn, int id){
+        static void Spinner(SpinnerPlus spn, int id){
             spn.setSelectId(id);
         }
 
-        public static void CheckBox(CheckBoxPlus box){
+        static void CheckBox(CheckBoxPlus box){
             box.setChecked(true);
         }
 
@@ -417,29 +411,21 @@ public class Form {
             sw.setChecked(true);
         }
 
-        public static void RadioButton(RadioButtonPlus rdb){
+        static void RadioButton(RadioButtonPlus rdb){
             rdb.setChecked(true);
         }
 
-        public static void TextView(TextViewPlus tv, String t){
+        static void TextView(TextViewPlus tv, String t){
             tv.setText(t);
         }
     }
 
     private static class clear{
-        public static void EditText(EditTextPlus edt){
-            edt.setText("");
-        }
-
-        public static void AutoCompleteTextView(AutoCompleteTextViewPlus edt){
-            edt.setText("");
-        }
-
-        public static void Spinner(SpinnerPlus spn){
+        static void Spinner(SpinnerPlus spn){
             spn.setSelection(0);
         }
 
-        public static void CheckBox(CheckBoxPlus box){
+        static void CheckBox(CheckBoxPlus box){
             box.setChecked(false);
         }
 
@@ -447,12 +433,14 @@ public class Form {
             sw.setChecked(false);
         }
 
-        public static void RadioGroup(RadioGroupPlus rdb){
+        static void RadioGroup(RadioGroupPlus rdb){
             rdb.clearCheck();
         }
 
-        public static void TextInputLayout(TextInputLayout til){
-            til.getEditText().setText("");
+        static void TextInputLayout(TextInputLayout til){
+            if (til.getEditText() != null) {
+                til.getEditText().setText("");
+            }
         }
     }
 }

@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.support.annotation.DrawableRes;
-import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestListener;
@@ -17,7 +15,7 @@ import java.util.Date;
 /**
  * Clase que almacena diversos métodos para su uso general
  *
- * @autor   Ing Alejandro Martínez Flores
+ * @author   Ing Alejandro Martínez Flores
  * @since   09/07/2018
  * @version 1
  */
@@ -46,7 +44,7 @@ public class utils {
      * @param fi    Fecha inicial
      * @param ff    Fecha final
      * @param fc    Factor de tiempo
-     * @return
+     * @return Diferencia de tiempo
      */
     public static long getDifference(Date fi, Date ff, TIME_FACTORS  fc){
         return (ff.getTime() - fi.getTime()) / fc.getValue();
@@ -83,7 +81,7 @@ public class utils {
                 listener(new RequestListener<String, Bitmap>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<Bitmap> target, boolean isFirstResource) {
-                        Toast.makeText(c, "No pudo cargarse la imagen", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(c, "No pudo cargarse la imagen", Toast.LENGTH_SHORT).show();
                         return false;
                     }
 

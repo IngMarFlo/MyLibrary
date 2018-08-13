@@ -4,17 +4,21 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.RadioGroup;
 
+import mx.com.marflo.marflolibrary.R;
+
 /**
  * @version 1
- * @autor Ing Alejandro Martínez Flores
+ * @author Ing Alejandro Martínez Flores
  * @since 09/07/2018
  */
 public class RadioGroupPlus extends RadioGroup implements customView{
 
+    private Context context;
     private customPropertiesMannager mannager;
 
     public RadioGroupPlus(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         mannager = new customPropertiesMannager(context, attrs);
 
         if (mannager.getField() != null){
@@ -42,7 +46,7 @@ public class RadioGroupPlus extends RadioGroup implements customView{
 
     public void setError(){
         for (int i = 0; i < getChildCount(); i++){
-            (getRadioButton(i)).setError("Seleccione una opción");
+            (getRadioButton(i)).setError(context.getResources().getString(R.string.rdg_error));
         }
     }
 
@@ -53,7 +57,7 @@ public class RadioGroupPlus extends RadioGroup implements customView{
     public String getValueOfCheckedRadioButton(){
         if (isSelected()){
             int checkId = getCheckedRadioButtonId();
-            RadioButtonPlus rdb = (RadioButtonPlus) findViewById(checkId);
+            RadioButtonPlus rdb = findViewById(checkId);
             return rdb.getField();
         }else {
             return "undefined";

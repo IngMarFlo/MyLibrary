@@ -5,7 +5,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
 /**
- * @autor Ing Alejandro Martínez Flores
+ * @author Ing Alejandro Martínez Flores
  * @since 09/07/2018
  * @version 1
  */
@@ -38,7 +38,6 @@ public class TextViewPlus extends AppCompatTextView implements customView{
 
     /**
      * Método despreciado para la validación del formulario por el tipo de elemento
-     * @param ob
      */
     @Deprecated
     public void setObligatorio(boolean ob) {

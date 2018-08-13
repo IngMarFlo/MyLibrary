@@ -1,16 +1,23 @@
 package mx.com.marflo.marflolibrary.permisos_android;
 
-import android.support.annotation.IdRes;
-import android.support.annotation.StringRes;
-
 /**
- * Alejandro Martinez Flores on 12/08/2018.
- */
+ * @author Alejandro Martínez Flores
+ * @version 1
+ * @since 13-08-2018
+*/
 public interface Permits {
+	/**
+	 * Request code del Intent
+	 */
 	int getRequestCode();
-	@StringRes
-	int getMessageResorce();
-	@StringRes
-	int getDialogRequestMessageResource();
- 	String getName();
+
+	/**
+	 * @return Mensaje a mostrar en el diálogo para solicitar el permiso
+	 */
+	String getDialogRequestMessageResource();
+
+	/**
+	 * @return Nombre del permiso
+	 */
+ 	android.Manifest.permission getName();
 }

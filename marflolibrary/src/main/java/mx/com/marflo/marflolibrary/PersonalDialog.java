@@ -34,43 +34,47 @@ public class PersonalDialog {
      * Método que agrega un view al cuadro de diálogo, esto para crear cuadros con formulario, radios, etc.
      * @param view Elemento a mostrar
      */
-    public void setView(View view){
+    public PersonalDialog setView(View view){
         this.view = view;
+        return this;
     }
 
     /**
      * Método que establece la aparición del botón negativo en el cuadro de diálogo
      * @param title Texto para mostrar en el botón
      */
-    public void setShowNo(String title){
+    public PersonalDialog setShowNo(String title){
         showNo          = true;
         this.noTitle    = title;
         if(mAlertDialog!=null){
             mAlertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setText(title);
         }
+        return this;
     }
 
     /**
      * Método que establece la aparición del botón neutral en el cuadro de diálogo
      * @param title Texto para mostrar en el botón
      */
-    public void setShowNeutral(String title){
+    public PersonalDialog setShowNeutral(String title){
         showNeutral         = true;
         this.neutralTitle   = title;
         if(mAlertDialog!=null){
             mAlertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setText(title);
         }
+        return this;
     }
 
     /**
      * Método para establecer el título del botón
      * @param title Texto para mostrar en el botón
      */
-    public void setYesTitle (String title){
+    public PersonalDialog setYesTitle (String title){
         this.yesTitle = title;
         if(mAlertDialog!=null){
             mAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setText(title);
         }
+        return this;
     }
 
     /**
@@ -99,7 +103,7 @@ public class PersonalDialog {
 
         String yes;
         if (yesTitle == null){
-            yes = "Aceptar";
+            yes = context.getResources().getString(R.string.ACEPTAR);
         }else {
             yes = yesTitle;
         }

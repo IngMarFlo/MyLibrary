@@ -24,7 +24,7 @@ public class androidPermits {
      * @return          Valor boleano indicando si se cuenta con el permiso
      */
     public static boolean verificarPermiso(Context context, Permits permiso){
-        if (ContextCompat.checkSelfPermission(context, permiso.getName()) == PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(context, permiso.getName().toString()) == PackageManager.PERMISSION_GRANTED){
             return true;
         }else{
             solicitarPermiso((Activity) context, permiso);
@@ -33,10 +33,10 @@ public class androidPermits {
     }
 
     private static void solicitarPermiso(Activity activity, Permits permiso){
-        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permiso.getName())){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permiso.getName().toString())){
             mostrarDialogo(activity, permiso);
         }else{
-            ActivityCompat.requestPermissions(activity, new String[]{permiso.getName()}, permiso.getRequestCode());
+            ActivityCompat.requestPermissions(activity, new String[]{permiso.getName().toString()}, permiso.getRequestCode());
         }
     }
 
@@ -44,13 +44,13 @@ public class androidPermits {
         PersonalDialog dialog = new PersonalDialog();
         dialog.showDialog(activity,
                 activity.getResources().getString(R.string.permiso_faltante),
-                activity.getResources().getString(permiso.getDialogRequestMessageResource()),
+                permiso.getDialogRequestMessageResource(),
                 PersonalDialog.ICON.INFO,
                 new PersonalDialog.Callback() {
                     @Override
                     public void onPositiveClick(AlertDialog ad) {
                         ad.dismiss();
-                        ActivityCompat.requestPermissions(activity, new String[]{permiso.getName()}, permiso.getRequestCode());
+                        ActivityCompat.requestPermissions(activity, new String[]{permiso.getName().toString()}, permiso.getRequestCode());
                     }
 
                     @Override

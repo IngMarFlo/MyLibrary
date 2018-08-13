@@ -16,10 +16,10 @@ import java.util.ArrayList;
  */
 public class SpinnerAdapter extends ArrayAdapter<spinnersModels>{
 
-    private SpinnerRender<spinnersModels>   render;
+    private SpinnerRender   render;
     private ArrayList<spinnersModels>       data;
 
-    public SpinnerAdapter(@NonNull Context context, ArrayList<spinnersModels> data, SpinnerRender<spinnersModels> render) {
+    public SpinnerAdapter(@NonNull Context context, ArrayList<spinnersModels> data, SpinnerRender render) {
         super(context, render.getResource(), data);
         this.render = render;
         this.data   = data;

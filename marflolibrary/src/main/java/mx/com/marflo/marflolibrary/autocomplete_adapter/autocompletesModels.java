@@ -5,7 +5,7 @@ import mx.com.marflo.marflolibrary.common_class.dataModels;
 
 /**
  * Clase de la cual deben heredar todas las clases que fungiran como modelo de datos para el adaptador autocomplete
- * @autor Ing Alejandro Martínez Flores
+ * @author Ing Alejandro Martínez Flores
  * @since 09/07/2018
  * @version 1
  */

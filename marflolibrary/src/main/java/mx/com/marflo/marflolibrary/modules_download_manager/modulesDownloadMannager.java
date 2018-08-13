@@ -28,7 +28,7 @@ import mx.com.marflo.marflolibrary.R;
 
 /**
  * @version 1
- * @autor Ing Alejandro Martínez Flores
+ * @author Ing Alejandro Martínez Flores
  * @since 02/08/2018
  */
 public class modulesDownloadMannager {
@@ -69,29 +69,29 @@ public class modulesDownloadMannager {
     }
 
     private void dialogDescarga(){
-        PersonalDialog dialog = new PersonalDialog();
-        dialog.setShowNo("Cancelar");
-        dialog.showDialog(context, "Descargar contenido", "La aplicación debe descargar contenido adicional\n\n" +
-                        "NO CIERRE LA APLICACION\n\n" +
-                        "Al finalizar, la aplicación se reiniciará",
-                PersonalDialog.ICON.INFO, new PersonalDialog.Callback() {
-                    @Override
-                    public void onPositiveClick(AlertDialog ad) {
-                        ad.dismiss();
-                        showDialogDownload = false;
-                        initDownload();
-                    }
+        new PersonalDialog()
+                .setShowNo(context.getResources().getString(R.string.CANCELAR))
+                .showDialog(context,
+                        context.getResources().getString(R.string.download_content_title),
+                        context.getResources().getString(R.string.download_content_message),
+                        PersonalDialog.ICON.INFO, new PersonalDialog.Callback() {
+                            @Override
+                            public void onPositiveClick(AlertDialog ad) {
+                                ad.dismiss();
+                                showDialogDownload = false;
+                                initDownload();
+                            }
 
-                    @Override
-                    public void onNeutralClick(AlertDialog ad) {
+                            @Override
+                            public void onNeutralClick(AlertDialog ad) {
 
-                    }
+                            }
 
-                    @Override
-                    public void onNegativeClick(AlertDialog ad) {
-                        ad.dismiss();
-                    }
-                });
+                            @Override
+                            public void onNegativeClick(AlertDialog ad) {
+                                ad.dismiss();
+                            }
+                        });
     }
 
     private void initDownload(){
@@ -108,7 +108,6 @@ public class modulesDownloadMannager {
                     public void onFailure(Exception e) {
                         SplitInstallException sie = (SplitInstallException) e;
                         manageErrors(0, sie);
-                        //HandleException.show(context, e);
                     }
                 });
     }
@@ -142,8 +141,7 @@ public class modulesDownloadMannager {
                     try {
                         context.startIntentSender(state.resolutionIntent().getIntentSender(), null, 0,0,0);
                     } catch (IntentSender.SendIntentException e) {
-                        HandleException.show(context, e);
-                        //HandleException.show(context, e);
+                        new HandleException(context).show(e);
                     }
                     break;
                 case SplitInstallSessionStatus.DOWNLOADING:
@@ -153,14 +151,14 @@ public class modulesDownloadMannager {
                     setProgres(total, progres);
                     break;
                 case SplitInstallSessionStatus.DOWNLOADED:
-                    tv.setText("Descargado...");
+                    tv.setText(context.getResources().getString(R.string.download_downloaded));
                     break;
                 case SplitInstallSessionStatus.INSTALLING:
                     progressBar.setIndeterminate(true);
-                    tv.setText("Instalando módulo...");
+                    tv.setText(context.getResources().getString(R.string.download_instaling_module));
                     break;
                 case SplitInstallSessionStatus.INSTALLED:
-                    tv.setText("Módulo instalado");
+                    tv.setText(context.getResources().getString(R.string.download_module_installed));
                     if (dialog != null) {
                         dialog.dismiss();
                     }
@@ -172,23 +170,25 @@ public class modulesDownloadMannager {
                 case SplitInstallSessionStatus.CANCELING:
                     progressBar.setProgress(0);
                     progressBar.setIndeterminate(true);
-                    tv.setText("Cancelando...");
+                    tv.setText(context.getResources().getString(R.string.download_canceling));
                     break;
                 case SplitInstallSessionStatus.CANCELED:
                     if (dialog != null) {
                         dialog.dismiss();
                     }
-                    Toast.makeText(context,"Descarga cancelada", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,context.getResources().getString(R.string.download_download_cancel), Toast.LENGTH_LONG).show();
                     break;
             }
         }
     };
 
     private void showCancelDialog(String error){
-        PersonalDialog pd = new PersonalDialog();
-        pd.setShowNo("Cancelar");
-        pd.setYesTitle("Reintentar");
-        pd.showDialog(context, "Error ocurrido", error + "\n\n¿Qué desea hacer?",
+
+        new PersonalDialog()
+            .setShowNo(context.getResources().getString(R.string.CANCELAR))
+            .setYesTitle(context.getResources().getString(R.string.TRY))
+            .showDialog(context, context.getResources().getString(R.string.ERROR),
+                    error +"\n\n"+context.getResources().getString(R.string.QUE_HACER),
                 PersonalDialog.ICON.INFO, new PersonalDialog.Callback() {
                     @Override
                     public void onPositiveClick(AlertDialog cancelDialog) {
@@ -219,10 +219,10 @@ public class modulesDownloadMannager {
 
         tv          = v.findViewById(R.id.tvProgressBar);
 
-        tv.setText("Iniciando descarga...");
+        tv.setText(context.getResources().getString(R.string.download_init));
 
         AlertDialog.Builder b = new AlertDialog.Builder(context);
-        b.setTitle("Descargando módulo");
+        b.setTitle(context.getResources().getString(R.string.download_downloaded_module));
         b.setCancelable(false);
         b.setView(v);
 
@@ -234,7 +234,9 @@ public class modulesDownloadMannager {
         double div = (double)downloaded / total;
         int P = (int) (div * 100);
 
-        tv.setText(P+" %");
+        String t = P+" %";
+
+        tv.setText(t);
         progressBar.setProgress(P);
 
     }
@@ -305,7 +307,7 @@ public class modulesDownloadMannager {
 
             case SplitInstallErrorCode.SERVICE_DIED:
                 if (dialog != null){
-                    tv.setText("Reintentando...");
+                    tv.setText(context.getResources().getString(R.string.TRYING));
                 }
                 download();
                 break;

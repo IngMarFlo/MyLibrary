@@ -9,7 +9,7 @@ import mx.com.marflo.marflolibrary.common_interfaces.finderCommon;
 
 /**
  * @version 1
- * @autor Ing Alejandro Martínez Flores
+ * @author Ing Alejandro Martínez Flores
  * @since 09/07/2018
  */
 public abstract class AutocompleteRenderTemplate<M extends autocompletesModels> extends autocompleteRender<M> {
@@ -39,5 +39,5 @@ public abstract class AutocompleteRenderTemplate<M extends autocompletesModels> 
      * @param model     Modelo de datos que extiende de la clase spinnersModels
      * @param finder    Objeto de apoyo para mayor facilidad para mostrar información
      */
-    public abstract void setInfo(M model, finderCommon finder);
+    abstract void setInfo(M model, finderCommon finder);
 }

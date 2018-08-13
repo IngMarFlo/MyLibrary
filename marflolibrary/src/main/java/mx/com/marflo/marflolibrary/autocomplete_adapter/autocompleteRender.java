@@ -5,7 +5,7 @@ import mx.com.marflo.marflolibrary.common_class.commonRender;
 
 /**
  * @version 1
- * @autor Ing Alejandro Martínez Flores
+ * @author Ing Alejandro Martínez Flores
  * @since 09/07/2018
  */
 abstract class autocompleteRender<M extends autocompletesModels> extends commonRender<M> {

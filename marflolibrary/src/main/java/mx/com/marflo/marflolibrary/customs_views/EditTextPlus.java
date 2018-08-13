@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 
 /**
  * Clase para personalizar el EditText
- * @autor        Ing Alejandro Martínez Flores
+ * @author        Ing Alejandro Martínez Flores
  * @since        09/07/2018
  * @version      1
  */

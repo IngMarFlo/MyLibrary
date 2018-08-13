@@ -7,7 +7,7 @@ import android.widget.Switch;
 
 /**
  * @version 1
- * @autor Ing Alejandro Martínez Flores
+ * @author Ing Alejandro Martínez Flores
  * @since 09/07/2018
  */
 public class SwitchPlus extends Switch implements customView{
@@ -49,7 +49,6 @@ public class SwitchPlus extends Switch implements customView{
 
     /**
      * Método despreciado para la validación del formulario por el tipo de elemento
-     * @param ob
      */
     @Deprecated
     public void setObligatorio(boolean ob) {

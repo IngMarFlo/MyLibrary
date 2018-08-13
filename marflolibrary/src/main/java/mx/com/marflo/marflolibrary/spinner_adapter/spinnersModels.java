@@ -12,6 +12,6 @@ import mx.com.marflo.marflolibrary.common_class.dataModels;
  */
 public abstract class spinnersModels extends dataModels implements spinnersInterface{
     public boolean isSelectionValid(){
-        return getId() != -1;
+        return getId() != -1 || (getIdRef() != null && getIdRef().equals("-1"));
     }
 }

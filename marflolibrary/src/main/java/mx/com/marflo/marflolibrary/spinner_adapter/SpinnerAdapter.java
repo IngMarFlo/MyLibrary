@@ -50,9 +50,17 @@ public class SpinnerAdapter extends ArrayAdapter<spinnersModels>{
         }
         return 0;
     }
+    public int getPositionByReference(String ref){
+        for (int i = 0; i < data.size(); i++){
+            if (data.get(i).getIdRef().equals(ref)){
+                return i;
+            }
+        }
+        return 0;
+    }
 
     public boolean hasObligatoryItem(){
-        return data.get(0).getId() == -1;
+        return data.get(0).getId() == -1 || (data.get(0).getIdRef() != null && data.get(0).getIdRef().equals("-1"));
     }
 
     public spinnersModels getModel(int pos){

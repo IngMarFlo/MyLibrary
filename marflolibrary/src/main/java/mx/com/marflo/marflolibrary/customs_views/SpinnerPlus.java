@@ -18,11 +18,9 @@ public class SpinnerPlus extends android.support.v7.widget.AppCompatSpinner impl
     private customPropertiesMannager mannager;
     private spinnersModels model;
     private Callback callback;
-    private Context context;
 
     public SpinnerPlus(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.context = context;
 
         mannager = new customPropertiesMannager(context, attrs);
 
@@ -35,7 +33,6 @@ public class SpinnerPlus extends android.support.v7.widget.AppCompatSpinner impl
 
     public SpinnerPlus(Context c, String field, String invalidMesage, boolean obligatorio){
         super(c);
-        this.context = c;
 
         mannager = new customPropertiesMannager(c, field, invalidMesage, obligatorio);
         if (field != null){
@@ -56,6 +53,14 @@ public class SpinnerPlus extends android.support.v7.widget.AppCompatSpinner impl
         }
     }
 
+    public void setSelectIdRef(String idRef){
+        SpinnerAdapter ad = (SpinnerAdapter) getAdapter();
+        if (ad != null) {
+            int pos = ad.getPositionByReference(idRef);
+            this.setSelection(pos);
+        }
+    }
+
     public boolean hasObligatoryItem(){
         SpinnerAdapter ad = (SpinnerAdapter) this.getAdapter();
         return ad.hasObligatoryItem();
@@ -70,6 +75,14 @@ public class SpinnerPlus extends android.support.v7.widget.AppCompatSpinner impl
             return -1;
         }else{
             return model.getId();
+        }
+    }
+
+    public String getSelectedIdRefence(){
+        if (model == null){
+            return null;
+        }else{
+            return model.getIdRef();
         }
     }
 

@@ -13,11 +13,16 @@ import mx.com.marflo.marflolibrary.spinner_adapter.spinnersModels;
  */
 public class spinnerBasicoModel extends spinnersModels {
     private int     id;
-    private String  descripcion;
+    private String  idReference, descripcion;
     private spinnersModels data;
 
     public spinnerBasicoModel(int id, String descripcion) {
         this.id = id;
+        this.descripcion = descripcion;
+    }
+
+    public spinnerBasicoModel(String idReference, String descripcion) {
+        this.idReference = idReference;
         this.descripcion = descripcion;
     }
 
@@ -66,6 +71,11 @@ public class spinnerBasicoModel extends spinnersModels {
     @Override
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String getIdRef() {
+        return idReference;
     }
 }
 

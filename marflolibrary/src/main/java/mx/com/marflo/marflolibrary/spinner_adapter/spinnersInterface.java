@@ -7,4 +7,5 @@ package mx.com.marflo.marflolibrary.spinner_adapter;
  */
 interface spinnersInterface {
     int getId();
+    String getIdRef();
 }

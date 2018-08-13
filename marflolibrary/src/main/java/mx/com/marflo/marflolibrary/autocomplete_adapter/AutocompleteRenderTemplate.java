@@ -39,5 +39,5 @@ public abstract class AutocompleteRenderTemplate<M extends autocompletesModels> 
      * @param model     Modelo de datos que extiende de la clase spinnersModels
      * @param finder    Objeto de apoyo para mayor facilidad para mostrar información
      */
-    abstract void setInfo(M model, finderCommon finder);
+    public abstract void setInfo(M model, finderCommon finder);
 }

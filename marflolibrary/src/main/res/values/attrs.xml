@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Customs">
+
+        <attr name="field"          format="string"/>
+        <attr name="obligatorio"    format="boolean"/>
+        <attr name="invalid_message" format="string"/>
+
+    </declare-styleable>
+
+</resources>

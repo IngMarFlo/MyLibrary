@@ -31,4 +31,29 @@
     <string name="download_download_cancel">Descarga cancelada</string>
     <string name="download_init">Iniciando descarga</string>
     <string name="download_downloaded_module">Descargando módulo</string>
+
+    <string name="BILLING_RESPONSE_UNDEFINED">Error desconocido</string>
+    <string name="BILLING_RESPONSE_RESULT_USER_CANCELED">Compra cancelada por el usuario</string>
+    <string name="BILLING_RESPONSE_RESULT_SERVICE_UNAVAILABLE">No hay conexión de red</string>
+    <string name="BILLING_RESPONSE_RESULT_BILLING_UNAVAILABLE">Versión de API incompatible</string>
+    <string name="BILLING_RESPONSE_RESULT_ITEM_UNAVAILABLE">Producto no disponible</string>
+    <string name="BILLING_RESPONSE_RESULT_DEVELOPER_ERROR">Error de desarrollo</string>
+    <string name="BILLING_RESPONSE_RESULT_ERROR">Error fatal ocurrido</string>
+    <string name="BILLING_RESPONSE_RESULT_ITEM_ALREADY_OWNED">El producto fue adquirido con anterioridad</string>
+    <string name="BILLING_RESPONSE_RESULT_ITEM_NOT_OWNED">Consumo no concretado porque no se adquirió el producto</string>
+
+    <string name="COMPRA_REALIZADA">Compra realizada</string>
+    <string name="COMPRA_NO_RECONOCIDA">Algo salió mal !</string>
+    <string name="COMPRA_FALLO_CREACION_JSON">Falló la lectura de información de compra</string>
+    <string name="COMPRA_CANCELADA">Compra cancelada</string>
+
+    <string name="dialog_pdf_viewer_copy_finish_title">Archivo almacenado</string>
+    <string name="dialog_pdf_viewer_copy_finish_message">El archivo se almacenó en la ruta:</string>
+    <string name="dialog_pdf_viewer_copy_finish_view">Mostrar archivo</string>
+
+    <string name="utils_visualizar_archivo_con_chooser_abrir_con">Abrir con</string>
+    <string name="utils_visualizar_archivo_con_chooser_no_app_title">Sin aplicación</string>
+    <string name="utils_visualizar_archivo_con_chooser_no_app_message">No se encontro aplicación disponible para leer el archivo</string>
+
+
 </resources>

@@ -1,16 +1,26 @@
 package mx.com.marflo.marflolibrary;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.DrawableRes;
+import android.support.v4.content.FileProvider;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Clase que almacena diversos métodos para su uso general
@@ -20,6 +30,10 @@ import java.util.Date;
  * @version 1
  */
 public class utils {
+
+    public static SimpleDateFormat getSimpleDateFormat(){
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+    }
 
     public enum TIME_FACTORS{
 
@@ -92,5 +106,43 @@ public class utils {
                         return true;
                     }
                 }).into(imv);
+    }
+
+    public static void visualizarArchivoConChooser(Context context, File file, int codeRequest){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            uri = FileProvider.getUriForFile(context, "mx.com.marflo.marflolibrary.provider",file);
+        } else{
+            uri = Uri.fromFile(file);
+        }
+
+        String abrirCon		= context.getResources().getString(R.string.utils_visualizar_archivo_con_chooser_abrir_con);
+        String noAppTitle	= context.getResources().getString(R.string.utils_visualizar_archivo_con_chooser_no_app_title);
+        String noAppMessage	= context.getResources().getString(R.string.utils_visualizar_archivo_con_chooser_no_app_message);
+
+        intent.setDataAndType(uri, getMimeType(file.getName()));
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Intent chooser = Intent.createChooser(intent, abrirCon);
+        Activity activity = (Activity)context;
+
+        try {
+            activity.startActivityForResult(chooser,codeRequest);
+        } catch (ActivityNotFoundException e) {
+            PersonalDialog dialog = new PersonalDialog();
+            dialog.showDialog(context, noAppTitle, noAppMessage, PersonalDialog.ICON.INFO,null);
+        }
+    }
+
+    private static String getMimeType(String fileName){
+        String extension = fileName.substring(fileName.length()-4,fileName.length());
+        if (!extension.contains(".")){
+            extension = "."+extension;
+        }
+        String mimeExtension = MimeTypeMap.getFileExtensionFromUrl(extension);
+
+        return MimeTypeMap.getSingleton().getMimeTypeFromExtension(mimeExtension);
     }
 }

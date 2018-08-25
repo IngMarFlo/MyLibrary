@@ -4,5 +4,8 @@
     <dimen name="half_margin">8dp</dimen>
     <dimen name="quarter_margin">4dp</dimen>
 
+    <dimen name="fab_elevation">6dp</dimen>
+    <dimen name="fab_border_width">0dp</dimen>
+
     <dimen name="corner_spinner_background">20dp</dimen>
 </resources>

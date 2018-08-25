@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MyCardView" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
+        <item name="cardElevation">@dimen/cardview_default_elevation</item>
+        <item name="contentPaddingBottom">@dimen/activity_margin</item>
+        <item name="contentPaddingTop">@dimen/activity_margin</item>
+        <item name="contentPaddingLeft">@dimen/half_margin</item>
+        <item name="contentPaddingRight">@dimen/half_margin</item>
+        <item name="cardBackgroundColor">@color/cardview_light_background</item>
+        <item name="cardUseCompatPadding">true</item>
+    </style>
+
+    <style name="MyAddFAB" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="fabSize">auto</item>
+        <item name="elevation">@dimen/fab_elevation</item>
+        <item name="srcCompat">@drawable/ic_add</item>
+        <item name="android:layout_gravity">end|bottom</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="useCompatPadding">true</item>
+        <item name="borderWidth">@dimen/fab_border_width</item>
+    </style>
+
+</resources>

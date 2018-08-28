@@ -62,6 +62,10 @@
     <string name="permit_access_network_state">Sin el permiso de verificar el estado de la red de su dispositivo, no se puede continuar</string>
     <string name="permit_camera">Sin el permiso de utilizar la cámara de su dispositivo, no se puede continuar</string>
     <string name="permit_call_phone">Sin el permiso de realizar llamadas de su dispositivo, no se puede continuar</string>
+    <string name="permit_write_external_storage_denied">El permiso para leer y escribir archivos fue negado, la función no puede utilizarse por este motivo</string>
+    <string name="permit_access_network_state_denied">El permiso para verificar el estado de la red fue negado, la función no puede utilizarse por este motivo</string>
+    <string name="permit_call_phone_denied">El permiso para realizar llamadas fue negado, la función no puede utilizarse por este motivo</string>
+    <string name="permit_camera_denied">El permiso para utilizar la cámara fue negado, la función no puede utilizarse por este motivo</string>
 
 
 </resources>

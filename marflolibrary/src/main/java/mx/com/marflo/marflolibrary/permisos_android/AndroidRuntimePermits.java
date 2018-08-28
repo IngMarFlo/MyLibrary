@@ -27,7 +27,7 @@ public enum AndroidRuntimePermits{
         this.name               = name;
     }
 
-    int getRequestCode() {
+    public int getRequestCode() {
         return code;
     }
 

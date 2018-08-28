@@ -5,7 +5,7 @@ import android.content.Context;
 import com.itextpdf.text.DocumentException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import mx.com.marflo.marflolibrary.PersonalDialog;
 import mx.com.marflo.marflolibrary.R;
@@ -41,5 +41,5 @@ public abstract class pdfCreator {
         return new File(c.getCacheDir(), name);
     }
 
-    public abstract File create() throws DocumentException, FileNotFoundException;
+    public abstract File create() throws DocumentException, IOException;
 }

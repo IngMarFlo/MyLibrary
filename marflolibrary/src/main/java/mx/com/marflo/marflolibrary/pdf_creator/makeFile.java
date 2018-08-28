@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import com.itextpdf.text.DocumentException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * @author Alejandro Martínez Flores
@@ -26,7 +26,7 @@ class makeFile extends AsyncTask<String, Integer, File> {
     protected File doInBackground(String... strings) {
         try {
             return pdfCreator.create();
-        } catch (DocumentException | FileNotFoundException e) {
+        } catch (DocumentException | IOException e) {
             callback.onException(e);
             return null;
         }

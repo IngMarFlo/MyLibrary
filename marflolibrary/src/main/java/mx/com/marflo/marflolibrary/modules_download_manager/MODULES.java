@@ -8,10 +8,6 @@ package mx.com.marflo.marflolibrary.modules_download_manager;
  * @version 1
  */
 public interface MODULES {
-	/**
-	 * @return Package of module
-	 */
-	String getPackage();
 
 	/**
 	 * @return Name of module
@@ -19,7 +15,7 @@ public interface MODULES {
 	String getModuleName();
 
 	/**
-	 * @return Activity name, if is in a package, include package.ActivityName
+	 * @return Activity name include all package name
 	 */
 	String getActivityName();
 }

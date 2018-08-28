@@ -58,6 +58,10 @@
     <string name="pdf_maker_progres_message">Por favor espere…</string>
     <string name="CANCELADO">Cancelado</string>
     <string name="pdf_maker_cancelled">La creación del archivo ha sido cancelada</string>
+    <string name="permit_write_external_storage">Sin el permiso de utilizar el almacenamiento de su dispositivo, no se puede continuar</string>
+    <string name="permit_access_network_state">Sin el permiso de verificar el estado de la red de su dispositivo, no se puede continuar</string>
+    <string name="permit_camera">Sin el permiso de utilizar la cámara de su dispositivo, no se puede continuar</string>
+    <string name="permit_call_phone">Sin el permiso de realizar llamadas de su dispositivo, no se puede continuar</string>
 
 
 </resources>

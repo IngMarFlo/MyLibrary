@@ -20,11 +20,11 @@ public class androidPermits {
     /**
      * Método para verificar si se cuenta con el permiso
      * @param context   Contexto que llama al método
-     * @param permiso   Nombre del periso, utilizar los objetos String estaticos de la clase
+     * @param permiso   Enumeración de permisos {@link AndroidRuntimePermits}
      * @return          Valor boleano indicando si se cuenta con el permiso
      */
-    public static boolean verificarPermiso(Context context, Permits permiso){
-        if (ContextCompat.checkSelfPermission(context, permiso.getName().toString()) == PackageManager.PERMISSION_GRANTED){
+    public static boolean verificarPermiso(Context context, AndroidRuntimePermits permiso){
+        if (ContextCompat.checkSelfPermission(context, permiso.getName()) == PackageManager.PERMISSION_GRANTED){
             return true;
         }else{
             solicitarPermiso((Activity) context, permiso);
@@ -32,25 +32,25 @@ public class androidPermits {
         }
     }
 
-    private static void solicitarPermiso(Activity activity, Permits permiso){
-        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permiso.getName().toString())){
+    private static void solicitarPermiso(Activity activity, AndroidRuntimePermits permiso){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permiso.getName())){
             mostrarDialogo(activity, permiso);
         }else{
-            ActivityCompat.requestPermissions(activity, new String[]{permiso.getName().toString()}, permiso.getRequestCode());
+            ActivityCompat.requestPermissions(activity, new String[]{permiso.getName()}, permiso.getRequestCode());
         }
     }
 
-    private static void mostrarDialogo(final Activity activity, final Permits permiso){
+    private static void mostrarDialogo(final Activity activity, final AndroidRuntimePermits permiso){
         PersonalDialog dialog = new PersonalDialog();
         dialog.showDialog(activity,
                 activity.getResources().getString(R.string.permiso_faltante),
-                permiso.getDialogRequestMessageResource(),
+                permiso.getDialogRequestMessageResource(activity),
                 PersonalDialog.ICON.INFO,
                 new PersonalDialog.Callback() {
                     @Override
                     public void onPositiveClick(AlertDialog ad) {
                         ad.dismiss();
-                        ActivityCompat.requestPermissions(activity, new String[]{permiso.getName().toString()}, permiso.getRequestCode());
+                        ActivityCompat.requestPermissions(activity, new String[]{permiso.getName()}, permiso.getRequestCode());
                     }
 
                     @Override

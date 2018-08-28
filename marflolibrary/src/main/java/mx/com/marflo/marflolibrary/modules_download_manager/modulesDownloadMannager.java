@@ -252,7 +252,7 @@ public class modulesDownloadMannager {
             }
         }else{
 
-            i = new Intent().setClassName(context.getPackageName(), module.getActivityName());
+            i = new Intent().setClassName(module.getPackage(), module.getActivityName());
         }
 
         if (i != null){

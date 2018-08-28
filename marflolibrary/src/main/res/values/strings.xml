@@ -54,6 +54,10 @@
     <string name="utils_visualizar_archivo_con_chooser_abrir_con">Abrir con</string>
     <string name="utils_visualizar_archivo_con_chooser_no_app_title">Sin aplicación</string>
     <string name="utils_visualizar_archivo_con_chooser_no_app_message">No se encontro aplicación disponible para leer el archivo</string>
+    <string name="pdf_maker_creating_file">Creando archivo</string>
+    <string name="pdf_maker_progres_message">Por favor espere…</string>
+    <string name="CANCELADO">Cancelado</string>
+    <string name="pdf_maker_cancelled">La creación del archivo ha sido cancelada</string>
 
 
 </resources>

@@ -28,6 +28,14 @@ public class getCamera {
         return this;
     }
 
+    public File getDirectory(Context c) {
+        if (directory == null){
+            return c.getCacheDir();
+        }else {
+            return directory;
+        }
+    }
+
     public void tomarFoto(Context context, String photoName, int requestCode) {
 
         if (androidPermits.verificarPermiso(context, AndroidRuntimePermits.CAMERA)){

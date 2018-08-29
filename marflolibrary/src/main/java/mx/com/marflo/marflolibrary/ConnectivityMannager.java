@@ -54,4 +54,11 @@ public class ConnectivityMannager {
 
         return false;
     }
+
+    public static String getWifiName(Context context){
+        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert connectivity != null;
+        NetworkInfo info = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        return info.getExtraInfo();
+    }
 }

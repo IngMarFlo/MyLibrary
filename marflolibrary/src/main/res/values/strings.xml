@@ -67,5 +67,9 @@
     <string name="permit_call_phone_denied">El permiso para realizar llamadas fue negado, la función no puede utilizarse por este motivo</string>
     <string name="permit_camera_denied">El permiso para utilizar la cámara fue negado, la función no puede utilizarse por este motivo</string>
 
-
+    <string name="chooser_open_with">Abrir con…</string>
+    <string name="chooser_dialog_not_app_title">Sin aplicación</string>
+    <string name="chooser_dialog_not_app_message">No se encontro aplicación disponible para leer el archivo</string>
+    <string name="downloader_pb_title">Descarga de archivo</string>
+    <string name="downloader_tv_init_title">Por favor espere…</string>
 </resources>

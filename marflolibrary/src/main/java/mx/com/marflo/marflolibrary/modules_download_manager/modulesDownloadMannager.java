@@ -4,10 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.play.core.splitinstall.SplitInstallException;
@@ -25,6 +21,7 @@ import java.util.Set;
 import mx.com.marflo.marflolibrary.HandleException;
 import mx.com.marflo.marflolibrary.PersonalDialog;
 import mx.com.marflo.marflolibrary.R;
+import mx.com.marflo.marflolibrary.progress_bar_view.ProgressBarMannager;
 
 /**
  * @version 1
@@ -40,14 +37,13 @@ public class modulesDownloadMannager {
 
     private int mySession = 0;
 
-    private ProgressBar progressBar;
-    private AlertDialog dialog;
-    private TextView tv;
+    private ProgressBarMannager pbMannager;
     private boolean showDialogDownload;
 
     public modulesDownloadMannager(MODULES module, Context context){
         this.module = module;
         this.context= context;
+        pbMannager  = new ProgressBarMannager(context, R.string.download_downloaded_module, R.string.download_init);
 
         manager             = SplitInstallManagerFactory.create(context.getApplicationContext());
         showDialogDownload  = true;
@@ -95,7 +91,7 @@ public class modulesDownloadMannager {
     }
 
     private void initDownload(){
-        initDialog();
+        pbMannager.init();
 
         SplitInstallRequest request = SplitInstallRequest.newBuilder()
                 .addModule(module.getModuleName())
@@ -148,34 +144,29 @@ public class modulesDownloadMannager {
                     long total      = state.totalBytesToDownload();
                     long progres    = state.bytesDownloaded();
 
-                    setProgres(total, progres);
+                    pbMannager.setProgres(total, progres);
                     break;
                 case SplitInstallSessionStatus.DOWNLOADED:
-                    tv.setText(context.getResources().getString(R.string.download_downloaded));
+                    pbMannager.setMessage(R.string.download_downloaded);
                     break;
                 case SplitInstallSessionStatus.INSTALLING:
-                    progressBar.setIndeterminate(true);
-                    tv.setText(context.getResources().getString(R.string.download_instaling_module));
+                    pbMannager.setIndeterminate(true);
+                    pbMannager.setMessage(R.string.download_instaling_module);
                     break;
                 case SplitInstallSessionStatus.INSTALLED:
-                    tv.setText(context.getResources().getString(R.string.download_module_installed));
-                    if (dialog != null) {
-                        dialog.dismiss();
-                    }
+                    pbMannager.setMessage(R.string.download_module_installed);
+                    pbMannager.close();
                     goModule(true);
                     break;
                 case SplitInstallSessionStatus.FAILED:
                     manageErrors(state.errorCode(), null);
                     break;
                 case SplitInstallSessionStatus.CANCELING:
-                    progressBar.setProgress(0);
-                    progressBar.setIndeterminate(true);
-                    tv.setText(context.getResources().getString(R.string.download_canceling));
+                    pbMannager.setIndeterminate(true);
+                    pbMannager.setMessage(R.string.download_canceling);
                     break;
                 case SplitInstallSessionStatus.CANCELED:
-                    if (dialog != null) {
-                        dialog.dismiss();
-                    }
+                    pbMannager.close();
                     Toast.makeText(context,context.getResources().getString(R.string.download_download_cancel), Toast.LENGTH_LONG).show();
                     break;
             }
@@ -209,38 +200,6 @@ public class modulesDownloadMannager {
                 });
     }
 
-    private void initDialog(){
-
-        View v = LayoutInflater.from(context).inflate(R.layout.progress_bar, null, false);
-        v.setPadding(20,20,20,20);
-
-        progressBar = v.findViewById(R.id.pgProgressBar);
-        progressBar.setIndeterminate(false);
-
-        tv          = v.findViewById(R.id.tvProgressBar);
-
-        tv.setText(context.getResources().getString(R.string.download_init));
-
-        AlertDialog.Builder b = new AlertDialog.Builder(context);
-        b.setTitle(context.getResources().getString(R.string.download_downloaded_module));
-        b.setCancelable(false);
-        b.setView(v);
-
-        dialog = b.create();
-        dialog.show();
-    }
-
-    private void setProgres(long total, long downloaded){
-        double div = (double)downloaded / total;
-        int P = (int) (div * 100);
-
-        String t = P+" %";
-
-        tv.setText(t);
-        progressBar.setProgress(P);
-
-    }
-
     private void goModule(boolean restart){
 
         Intent i;
@@ -262,9 +221,7 @@ public class modulesDownloadMannager {
 
     private void manageErrors(int error, SplitInstallException e){
         manager.cancelInstall(mySession);
-        if (dialog != null) {
-            dialog.dismiss();
-        }
+        pbMannager.close();
 
         //Para cualquier error considerar un diálogo que indique el error y las opciones de reintentar y cancelar
         String eM = "";
@@ -306,9 +263,7 @@ public class modulesDownloadMannager {
                 break;
 
             case SplitInstallErrorCode.SERVICE_DIED:
-                if (dialog != null){
-                    tv.setText(context.getResources().getString(R.string.TRYING));
-                }
+                pbMannager.setMessage(R.string.TRYING);
                 download();
                 break;
         }

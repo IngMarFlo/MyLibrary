@@ -72,4 +72,8 @@
     <string name="chooser_dialog_not_app_message">No se encontro aplicación disponible para leer el archivo</string>
     <string name="downloader_pb_title">Descarga de archivo</string>
     <string name="downloader_tv_init_title">Por favor espere…</string>
+    <string name="dialog_downloader_title">Archivo existente</string>
+    <string name="OPEN">Abrir</string>
+    <string name="DOWNLOAD">Descargar</string>
+    <string name="dialog_downloader_message">El archivo que quiere descargar ya se ha descargado anteriormente, ¿Qué desea hacer?</string>
 </resources>

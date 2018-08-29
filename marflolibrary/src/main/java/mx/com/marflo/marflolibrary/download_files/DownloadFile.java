@@ -19,6 +19,7 @@ class DownloadFile extends AsyncTask<String, Integer, File>{
     private DownloadFileCallback callback;
     private Downloader.Callback dC;
     private File dest;
+    private Exception e;
 
     DownloadFile(DownloadFileCallback callback, File dest, Downloader.Callback dC) {
         this.callback   = callback;
@@ -33,15 +34,9 @@ class DownloadFile extends AsyncTask<String, Integer, File>{
         File file = null;
 
         try {
-            if (!dest.exists()){
-                dest.mkdir();
-            }
 
             String name = getFileName(URL);
 
-            file = new File(dest, name);
-
-            FileOutputStream f = new FileOutputStream(file);
             java.net.URL url = new URL(URL);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.setRequestMethod("POST");
@@ -53,6 +48,12 @@ class DownloadFile extends AsyncTask<String, Integer, File>{
             int len;
             int total = conn.getContentLength();
             long download = 0;
+
+            if (!dest.exists()){
+                dest.mkdir();
+            }
+            file = new File(dest, name);
+            FileOutputStream f = new FileOutputStream(file);
             while ((len = in.read(buffer))>0){
                 download += len;
                 dC.onProgress(total, download);
@@ -61,7 +62,7 @@ class DownloadFile extends AsyncTask<String, Integer, File>{
             f.close();
 
         } catch (final IOException e) {
-            callback.onException(e);
+            this.e = e;
         }
         return file;
     }
@@ -72,9 +73,13 @@ class DownloadFile extends AsyncTask<String, Integer, File>{
         if (file != null){
             callback.onFinish(file);
         }
+
+        if (e != null){
+            callback.onException(e);
+        }
     }
 
-    private String getFileName(String url){
+    static String getFileName(String url){
         String[] aURL = url.split("/");
         return aURL[aURL.length - 1];
     }

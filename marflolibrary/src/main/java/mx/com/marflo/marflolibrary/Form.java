@@ -1,7 +1,6 @@
 package mx.com.marflo.marflolibrary;
 
 import android.support.design.widget.TextInputLayout;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -120,10 +119,8 @@ public class Form {
                     try {
                         val = (String) js.get(k);
                     }catch (ClassCastException e){
-                        Log.println(Log.INFO, "MARFLO_","Excepcion val RadioGroupPlus => "+e.getMessage());
                         val = String.valueOf(js.get(k));
                     }
-Log.println(Log.INFO, "MARFLO_","val RadioGroupPlus => "+val);
                     v = parent.findViewWithTag(val);
 
                     set.RadioButton((RadioButtonPlus) v);

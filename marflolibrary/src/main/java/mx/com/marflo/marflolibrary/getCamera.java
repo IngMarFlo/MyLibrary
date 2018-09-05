@@ -20,8 +20,14 @@ import mx.com.marflo.marflolibrary.permisos_android.androidPermits;
 public class getCamera {
 
     private File directory;
+    private String provider;
 
     public getCamera(){}
+
+    public getCamera setProvider(String provider){
+        this.provider = provider;
+        return this;
+    }
 
     public getCamera setDirectory(File directory){
         this.directory = directory;
@@ -54,7 +60,10 @@ public class getCamera {
 
     private Uri getOutputMediaFileUri(Context context, String photoName){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-            return FilesUtils.getUriFromProvider(context, getOutputMediaFile(context, photoName));
+            if (provider == null){
+                throw new RuntimeException("getCamera provider null");
+            }
+            return FilesUtils.getUriFromProvider(context, getOutputMediaFile(context, photoName), provider);
         } else{
             return Uri.fromFile(getOutputMediaFile(context, photoName));
         }

@@ -48,16 +48,16 @@ public class FilesUtils {
         }
     }
 
-    static Uri getUriFromProvider(Context c, File f){
-        return FileProvider.getUriForFile(c, "mx.com.marflo.marflolibrary.provider", f);
+    static Uri getUriFromProvider(Context c, File f, String provider){
+        return FileProvider.getUriForFile(c, provider, f);
     }
 
-    public static void visualizarArchivoConChooser(Context context, File file, int codeRequest){
+    public static void visualizarArchivoConChooser(Context context, File file, int codeRequest, String provider){
         Intent intent = new Intent(Intent.ACTION_VIEW);
 
         Uri uri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-            uri = getUriFromProvider(context, file);
+            uri = getUriFromProvider(context, file, provider);
         } else{
             uri = Uri.fromFile(file);
         }

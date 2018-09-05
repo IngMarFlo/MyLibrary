@@ -70,6 +70,7 @@ public class Downloader implements DownloadFileCallback{
                             @Override
                             public void onPositiveClick(AlertDialog ad) {
                                 download();
+                                ad.dismiss();
                             }
 
                             @Override
@@ -79,6 +80,7 @@ public class Downloader implements DownloadFileCallback{
 
                             @Override
                             public void onNegativeClick(AlertDialog ad) {
+                                ad.dismiss();
                                 FilesUtils.visualizarArchivoConChooser(context, file, 1200);
                             }
                         });

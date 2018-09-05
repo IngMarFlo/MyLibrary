@@ -1,6 +1,7 @@
 package mx.com.marflo.marflolibrary.progress_bar_view;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -45,7 +46,9 @@ public class ProgressBarMannager {
     }
 
     public void init(){
-        dialog.show();
+        if (!((Activity) context).isFinishing()) {
+            dialog.show();
+        }
     }
 
     public void setMessage(int resMes){
@@ -53,8 +56,10 @@ public class ProgressBarMannager {
     }
 
     public void close(){
-        if (dialog.isShowing()) {
-            dialog.dismiss();
+        if (!((Activity) context).isFinishing()) {
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
         }
     }
 

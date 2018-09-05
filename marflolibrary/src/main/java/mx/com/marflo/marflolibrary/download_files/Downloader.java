@@ -6,7 +6,6 @@ import android.support.v7.app.AlertDialog;
 
 import java.io.File;
 
-import mx.com.marflo.marflolibrary.FilesUtils;
 import mx.com.marflo.marflolibrary.PersonalDialog;
 import mx.com.marflo.marflolibrary.R;
 import mx.com.marflo.marflolibrary.permisos_android.AndroidRuntimePermits;
@@ -81,7 +80,7 @@ public class Downloader implements DownloadFileCallback{
                             @Override
                             public void onNegativeClick(AlertDialog ad) {
                                 ad.dismiss();
-                                FilesUtils.visualizarArchivoConChooser(context, file, 1200);
+                                callback.onFinish(file);
                             }
                         });
     }

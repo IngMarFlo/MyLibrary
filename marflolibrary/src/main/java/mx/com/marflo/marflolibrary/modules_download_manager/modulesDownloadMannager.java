@@ -144,7 +144,12 @@ public class modulesDownloadMannager {
                     long total      = state.totalBytesToDownload();
                     long progres    = state.bytesDownloaded();
 
+                    double div = (double) progres / total;
+                    int P = (int) (div * 100);
+                    String t = P + " %";
+
                     pbMannager.setProgres(total, progres);
+                    pbMannager.setMessage(t);
                     break;
                 case SplitInstallSessionStatus.DOWNLOADED:
                     pbMannager.setMessage(R.string.download_downloaded);

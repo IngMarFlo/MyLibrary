@@ -10,7 +10,6 @@ import mx.com.marflo.marflolibrary.PersonalDialog;
 import mx.com.marflo.marflolibrary.R;
 import mx.com.marflo.marflolibrary.permisos_android.AndroidRuntimePermits;
 import mx.com.marflo.marflolibrary.permisos_android.androidPermits;
-import mx.com.marflo.marflolibrary.progress_bar_view.ProgressBarMannager;
 
 /**
  * @author Alejandro Martínez Flores
@@ -21,7 +20,6 @@ public class Downloader implements DownloadFileCallback{
 
     private Context context;
     private DownloadFileCallback callback;
-    private ProgressBarMannager pbMannager;
     private boolean showDialog;
     private File dest, file;
     private String URL;
@@ -86,38 +84,16 @@ public class Downloader implements DownloadFileCallback{
     }
 
     private void download(){
-        if (showDialog) {
-            pbMannager = new ProgressBarMannager(context, R.string.downloader_pb_title, R.string.downloader_tv_init_title);
-            pbMannager.init();
-        }
-
-        new DownloadFile(this, dest, new Callback() {
-            @Override
-            public void onProgress(long total, long download) {
-                if (showDialog) {
-                    pbMannager.setProgres(total, download);
-                }
-            }
-        }).execute(URL);
+        new DownloadFile(this, context, showDialog, dest).execute(URL);
     }
 
     @Override
     public void onFinish(File f) {
-        if (showDialog) {
-            pbMannager.close();
-        }
         callback.onFinish(f);
     }
 
     @Override
     public void onException(Exception e) {
-        if (showDialog) {
-            pbMannager.close();
-        }
         callback.onException(e);
-    }
-
-    interface Callback{
-        void onProgress(long total, long download);
     }
 }

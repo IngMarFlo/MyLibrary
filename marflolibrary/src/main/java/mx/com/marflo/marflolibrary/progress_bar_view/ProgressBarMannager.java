@@ -55,6 +55,10 @@ public class ProgressBarMannager {
         tv.setText(context.getResources().getString(resMes));
     }
 
+    public void setMessage(String mes){
+        tv.setText(mes);
+    }
+
     public void close(){
         if (!((Activity) context).isFinishing()) {
             if (dialog.isShowing()) {
@@ -66,12 +70,7 @@ public class ProgressBarMannager {
     public void setProgres(long total, long downloaded){
         double div = (double)downloaded / total;
         int P = (int) (div * 100);
-
-        String t = P+" %";
-
-        tv.setText(t);
         progressBar.setProgress(P);
-
     }
 
     public void setIndeterminate(boolean det){

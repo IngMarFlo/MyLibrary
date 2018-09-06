@@ -34,7 +34,7 @@ public class Downloader implements DownloadFileCallback{
      */
     public Downloader(Context context, boolean showDialog, String URL, @Nullable File dest, DownloadFileCallback callback){
         this.callback   = callback;
-        this.context    = context.getApplicationContext();
+        this.context    = context;
         this.dest       = (dest == null) ? context.getCacheDir() : dest;
         this.URL        = URL;
         this.showDialog = showDialog;

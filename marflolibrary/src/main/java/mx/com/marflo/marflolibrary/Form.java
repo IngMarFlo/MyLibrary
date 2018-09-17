@@ -1,6 +1,7 @@
 package mx.com.marflo.marflolibrary;
 
 import android.support.design.widget.TextInputLayout;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -114,7 +115,7 @@ public class Form {
                 if (map.get(k) instanceof Integer){
                     set.TextView((TextViewPlus) v, String.valueOf(map.get(k)));
                 }else{
-                    set.TextView((TextViewPlus) v, (String) map.get(k));
+                    set.TextView((TextViewPlus) v, map.get(k).toString());
                 }
             }
 

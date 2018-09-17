@@ -83,7 +83,11 @@ public class Form {
             View v = top.findViewWithTag(k);
 
             if (v instanceof EditTextPlus){
-                set.EditText((EditTextPlus) v, (String) map.get(k));
+                if (map.get(k) instanceof Integer){
+                    set.EditText((EditTextPlus) v, String.valueOf(map.get(k)));
+                }else {
+                    set.EditText((EditTextPlus) v, (String) map.get(k));
+                }
             }
 
             if (v instanceof AutoCompleteTextViewPlus){
@@ -107,7 +111,11 @@ public class Form {
             }
 
             if (v instanceof TextViewPlus){
-                set.TextView((TextViewPlus) v, (String) map.get(k));
+                if (map.get(k) instanceof Integer){
+                    set.TextView((TextViewPlus) v, String.valueOf(map.get(k)));
+                }else{
+                    set.TextView((TextViewPlus) v, (String) map.get(k));
+                }
             }
 
             if (v instanceof RadioGroupPlus){

@@ -4,7 +4,11 @@ import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -27,6 +31,19 @@ import mx.com.marflo.marflolibrary.spinner_adapter.spinnersModels;
  * @version 1
  */
 public class Form {
+
+    public static Map<String, Object> JSONtoMap(JSONObject js) throws JSONException{
+        Map<String, Object> map = new HashMap<>();
+        Iterator<String> keys = js.keys();
+
+        while (keys.hasNext()){
+            String key  = keys.next();
+            Object value= js.get(key);
+            map.put(key, value);
+        }
+
+        return map;
+    }
 
     public static void enabledForm(View parent, boolean enabled){
         ViewGroup group = (ViewGroup) parent;
@@ -154,7 +171,7 @@ public class Form {
                         isValid = false;
                     }
                 } else {
-                    if (valid.EditText((EditTextPlus) Objects.requireNonNull(til.getEditText()), til)) {
+                    if (valid.EditText((EditTextPlus) (Objects.requireNonNull(til.getEditText())), til)) {
                         isValid = false;
                     }
                 }
@@ -199,7 +216,7 @@ public class Form {
                 if (til.getEditText() instanceof AutoCompleteTextViewPlus){
                     getData.getAutocompleteData((AutoCompleteTextViewPlus) til.getEditText(), js);
                 }else {
-                    getData.getEditTextData((EditTextPlus) Objects.requireNonNull(til.getEditText()), js);
+                    getData.getEditTextData((EditTextPlus) (Objects.requireNonNull(til.getEditText())), js);
                 }
             }
 

@@ -1,7 +1,6 @@
 package mx.com.marflo.marflolibrary;
 
 import android.support.design.widget.TextInputLayout;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -92,23 +91,23 @@ public class Form {
             }
 
             if (v instanceof AutoCompleteTextViewPlus){
-                set.AutoCompleteTextView((AutoCompleteTextViewPlus) v, (int) map.get(k));
+                set.AutoCompleteTextView((AutoCompleteTextViewPlus) v, (Integer) map.get(k));
             }
 
             if (v instanceof CheckBoxPlus){
-                if ((boolean) map.get(k)) {
+                if ((Boolean) map.get(k)) {
                     set.CheckBox((CheckBoxPlus) v);
                 }
             }
 
             if (v instanceof SwitchPlus){
-                if ((boolean) map.get(k)) {
+                if ((Boolean) map.get(k)) {
                     set.Switch((SwitchPlus) v);
                 }
             }
 
             if (v instanceof SpinnerPlus){
-                set.Spinner((SpinnerPlus) v, (int) map.get(k));
+                set.Spinner((SpinnerPlus) v, (Integer) map.get(k));
             }
 
             if (v instanceof TextViewPlus){

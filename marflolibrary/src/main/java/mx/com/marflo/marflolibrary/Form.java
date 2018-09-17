@@ -38,8 +38,17 @@ public class Form {
 
         while (keys.hasNext()){
             String key  = keys.next();
-            Object value= js.get(key);
-            map.put(key, value);
+            if (js.get(key) instanceof String){
+                map.put(key, js.getString(key));
+            }else if(js.get(key) instanceof Integer){
+                map.put(key, js.getInt(key));
+            }else if (js.get(key) instanceof Double){
+                map.put(key, js.getDouble(key));
+            }else if (js.get(key) instanceof Boolean){
+                map.put(key, js.getBoolean(key));
+            }else if(js.get(key) instanceof Long){
+                map.put(key, js.getLong(key));
+            }
         }
 
         return map;
@@ -83,39 +92,31 @@ public class Form {
             View v = top.findViewWithTag(k);
 
             if (v instanceof EditTextPlus){
-                if (map.get(k) instanceof Integer){
-                    set.EditText((EditTextPlus) v, String.valueOf(map.get(k)));
-                }else {
-                    set.EditText((EditTextPlus) v, (String) map.get(k));
-                }
+                set.EditText((EditTextPlus) v, (String) map.get(k));
             }
 
             if (v instanceof AutoCompleteTextViewPlus){
-                set.AutoCompleteTextView((AutoCompleteTextViewPlus) v, (Integer) map.get(k));
+                set.AutoCompleteTextView((AutoCompleteTextViewPlus) v, (int) map.get(k));
             }
 
             if (v instanceof CheckBoxPlus){
-                if ((Boolean) map.get(k)) {
+                if ((boolean) map.get(k)) {
                     set.CheckBox((CheckBoxPlus) v);
                 }
             }
 
             if (v instanceof SwitchPlus){
-                if ((Boolean) map.get(k)) {
+                if ((boolean) map.get(k)) {
                     set.Switch((SwitchPlus) v);
                 }
             }
 
             if (v instanceof SpinnerPlus){
-                set.Spinner((SpinnerPlus) v, (Integer) map.get(k));
+                set.Spinner((SpinnerPlus) v, (int) map.get(k));
             }
 
             if (v instanceof TextViewPlus){
-                if (map.get(k) instanceof Integer){
-                    set.TextView((TextViewPlus) v, String.valueOf(map.get(k)));
-                }else{
-                    set.TextView((TextViewPlus) v, map.get(k).toString());
-                }
+                set.TextView((TextViewPlus) v, (String) map.get(k));
             }
 
             if (v instanceof RadioGroupPlus){

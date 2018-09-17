@@ -336,7 +336,13 @@ public class Form {
 
         private static boolean TextViewPlus(TextViewPlus tv){
             if (tv.isObligatorio()){
-                return tv.getText().toString().isEmpty();
+                if (tv.getText().toString().isEmpty()){
+                    tv.setError((tv.getInvalidMessage()==null) ? tv.getContext().getResources().getString(R.string.form_mandatory) : tv.getInvalidMessage());
+                    return true;
+                }else{
+                    tv.setError(null);
+                    return false;
+                }
             }else{
                 return false;
             }

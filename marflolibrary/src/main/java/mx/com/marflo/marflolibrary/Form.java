@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import mx.com.marflo.marflolibrary.autocomplete_adapter.autocompletesModels;
 import mx.com.marflo.marflolibrary.customs_views.AutoCompleteTextViewPlus;
@@ -31,28 +30,6 @@ import mx.com.marflo.marflolibrary.spinner_adapter.spinnersModels;
  * @version 1
  */
 public class Form {
-
-    public static Map<String, Object> JSONtoMap(JSONObject js) throws JSONException{
-        Map<String, Object> map = new HashMap<>();
-        Iterator<String> keys = js.keys();
-
-        while (keys.hasNext()){
-            String key  = keys.next();
-            if (js.get(key) instanceof String){
-                map.put(key, js.getString(key));
-            }else if(js.get(key) instanceof Integer){
-                map.put(key, js.getInt(key));
-            }else if (js.get(key) instanceof Double){
-                map.put(key, js.getDouble(key));
-            }else if (js.get(key) instanceof Boolean){
-                map.put(key, js.getBoolean(key));
-            }else if(js.get(key) instanceof Long){
-                map.put(key, js.getLong(key));
-            }
-        }
-
-        return map;
-    }
 
     public static void enabledForm(View parent, boolean enabled){
         ViewGroup group = (ViewGroup) parent;
@@ -84,52 +61,60 @@ public class Form {
         return childsLoop((ViewGroup) parent);
     }
 
-    public static void setValues(Map<String, Object> map, View parent){
+    public static void setValues(JSONObject js, View parent){
         ViewGroup top = (ViewGroup) parent;
-        Set<String> keys = map.keySet();
-        for (String k : keys){
+        try {
 
-            View v = top.findViewWithTag(k);
+            Iterator<String> keys = js.keys();
 
-            if (v instanceof EditTextPlus){
-                set.EditText((EditTextPlus) v, (String) map.get(k));
-            }
+            while (keys.hasNext()){
+                String  k = keys.next();
+                View    v = top.findViewWithTag(k);
 
-            if (v instanceof AutoCompleteTextViewPlus){
-                set.AutoCompleteTextView((AutoCompleteTextViewPlus) v, (int) map.get(k));
-            }
-
-            if (v instanceof CheckBoxPlus){
-                if ((boolean) map.get(k)) {
-                    set.CheckBox((CheckBoxPlus) v);
+                if (v instanceof EditTextPlus){
+                    set.EditText((EditTextPlus) v, js.getString(k));
                 }
-            }
 
-            if (v instanceof SwitchPlus){
-                if ((boolean) map.get(k)) {
-                    set.Switch((SwitchPlus) v);
+                if (v instanceof AutoCompleteTextViewPlus){
+                    set.AutoCompleteTextView((AutoCompleteTextViewPlus) v, js.getInt(k));
                 }
-            }
 
-            if (v instanceof SpinnerPlus){
-                set.Spinner((SpinnerPlus) v, (int) map.get(k));
-            }
-
-            if (v instanceof TextViewPlus){
-                set.TextView((TextViewPlus) v, (String) map.get(k));
-            }
-
-            if (v instanceof RadioGroupPlus){
-                String val;
-                try {
-                    val = (String) map.get(k);
-                }catch (ClassCastException e){
-                    val = String.valueOf(map.get(k));
+                if (v instanceof CheckBoxPlus){
+                    if (js.getBoolean(k)) {
+                        set.CheckBox((CheckBoxPlus) v);
+                    }
                 }
-                v = parent.findViewWithTag(val);
 
-                set.RadioButton((RadioButtonPlus) v);
+                if (v instanceof SwitchPlus){
+                    if (js.getBoolean(k)) {
+                        set.Switch((SwitchPlus) v);
+                    }
+                }
+
+                if (v instanceof SpinnerPlus){
+                    set.Spinner((SpinnerPlus) v, js.getInt(k));
+                }
+
+                if (v instanceof TextViewPlus){
+                    set.TextView((TextViewPlus) v, js.getString(k));
+                }
+
+                if (v instanceof RadioGroupPlus){
+                    String val;
+                    try {
+                        val = (String) js.get(k);
+                    }catch (ClassCastException e){
+                        val = String.valueOf(js.get(k));
+                    }
+                    v = parent.findViewWithTag(val);
+
+                    set.RadioButton((RadioButtonPlus) v);
+                }
+
             }
+
+        }catch (JSONException e){
+            e.printStackTrace();
         }
     }
 

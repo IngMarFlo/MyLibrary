@@ -3,12 +3,11 @@ package mx.com.marflo.marflolibrary;
 import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 import mx.com.marflo.marflolibrary.autocomplete_adapter.autocompletesModels;
 import mx.com.marflo.marflolibrary.customs_views.AutoCompleteTextViewPlus;
@@ -43,27 +42,10 @@ public class Form {
         }
     }
 
-    /**
-     * Método que verifica cada elemento del formulario y obtiene el valor ingresado o seleccionado por el usuario.
-     *
-     * @param   parent  Layout padre del archivo xml
-     * @return  Objeto  JSONObject con la información ingresada por el usuario
-     */
-    public static JSONObject getFormValues(View parent){
-        if (isValidForm(parent)) {
-            try {
-                JSONObject js = new JSONObject();
-                childsLoop((ViewGroup) parent, js);
-                return js;
-            }catch (JSONException e){
-                return null;
-            }
-        }else{
-            Toast.makeText(parent.getContext(),
-                    parent.getContext().getResources().getString(R.string.form_please_complete),
-                    Toast.LENGTH_SHORT).show();
-            return null;
-        }
+    public static Map<String, Object> getValues(View parent){
+        Map<String, Object> map = new HashMap<>();
+        childsLoop((ViewGroup) parent, map);
+        return map;
     }
 
     /**
@@ -76,60 +58,52 @@ public class Form {
         return childsLoop((ViewGroup) parent);
     }
 
-    public static void setValues(JSONObject js, View parent){
+    public static void setValues(Map<String, Object> map, View parent){
         ViewGroup top = (ViewGroup) parent;
-        try {
+        Set<String> keys = map.keySet();
+        for (String k : keys){
 
-            Iterator<String> keys = js.keys();
+            View v = top.findViewWithTag(k);
 
-            while (keys.hasNext()){
-                String  k = keys.next();
-                View    v = top.findViewWithTag(k);
-
-                if (v instanceof EditTextPlus){
-                    set.EditText((EditTextPlus) v, js.getString(k));
-                }
-
-                if (v instanceof AutoCompleteTextViewPlus){
-                    set.AutoCompleteTextView((AutoCompleteTextViewPlus) v, js.getInt(k));
-                }
-
-                if (v instanceof CheckBoxPlus){
-                    if (js.getBoolean(k)) {
-                        set.CheckBox((CheckBoxPlus) v);
-                    }
-                }
-
-                if (v instanceof SwitchPlus){
-                    if (js.getBoolean(k)) {
-                        set.Switch((SwitchPlus) v);
-                    }
-                }
-
-                if (v instanceof SpinnerPlus){
-                    set.Spinner((SpinnerPlus) v, js.getInt(k));
-                }
-
-                if (v instanceof TextViewPlus){
-                    set.TextView((TextViewPlus) v, js.getString(k));
-                }
-
-                if (v instanceof RadioGroupPlus){
-                    String val;
-                    try {
-                        val = (String) js.get(k);
-                    }catch (ClassCastException e){
-                        val = String.valueOf(js.get(k));
-                    }
-                    v = parent.findViewWithTag(val);
-
-                    set.RadioButton((RadioButtonPlus) v);
-                }
-
+            if (v instanceof EditTextPlus){
+                set.EditText((EditTextPlus) v, (String) map.get(k));
             }
 
-        }catch (JSONException e){
-            e.printStackTrace();
+            if (v instanceof AutoCompleteTextViewPlus){
+                set.AutoCompleteTextView((AutoCompleteTextViewPlus) v, (int) map.get(k));
+            }
+
+            if (v instanceof CheckBoxPlus){
+                if ((boolean) map.get(k)) {
+                    set.CheckBox((CheckBoxPlus) v);
+                }
+            }
+
+            if (v instanceof SwitchPlus){
+                if ((boolean) map.get(k)) {
+                    set.Switch((SwitchPlus) v);
+                }
+            }
+
+            if (v instanceof SpinnerPlus){
+                set.Spinner((SpinnerPlus) v, (int) map.get(k));
+            }
+
+            if (v instanceof TextViewPlus){
+                set.TextView((TextViewPlus) v, (String) map.get(k));
+            }
+
+            if (v instanceof RadioGroupPlus){
+                String val;
+                try {
+                    val = (String) map.get(k);
+                }catch (ClassCastException e){
+                    val = String.valueOf(map.get(k));
+                }
+                v = parent.findViewWithTag(val);
+
+                set.RadioButton((RadioButtonPlus) v);
+            }
         }
     }
 
@@ -180,7 +154,7 @@ public class Form {
                         isValid = false;
                     }
                 } else {
-                    if (valid.EditText((EditTextPlus) til.getEditText(), til)) {
+                    if (valid.EditText((EditTextPlus) Objects.requireNonNull(til.getEditText()), til)) {
                         isValid = false;
                     }
                 }
@@ -214,7 +188,7 @@ public class Form {
         return isValid;
     }
 
-    private static void childsLoop(ViewGroup lyt, JSONObject js) throws JSONException{
+    private static void childsLoop(ViewGroup lyt, Map<String, Object> js){
         for (int i = 0; i < lyt.getChildCount(); i++){
 
             View v = lyt.getChildAt(i);
@@ -225,7 +199,7 @@ public class Form {
                 if (til.getEditText() instanceof AutoCompleteTextViewPlus){
                     getData.getAutocompleteData((AutoCompleteTextViewPlus) til.getEditText(), js);
                 }else {
-                    getData.getEditTextData((EditTextPlus) til.getEditText(), js);
+                    getData.getEditTextData((EditTextPlus) Objects.requireNonNull(til.getEditText()), js);
                 }
             }
 
@@ -257,52 +231,52 @@ public class Form {
 
     private static class getData{
 
-        private static void getEditTextData(EditTextPlus edt, JSONObject js) throws JSONException{
-            js.accumulate(edt.getField(), edt.getText().toString());
+        private static void getEditTextData(EditTextPlus edt, Map<String, Object> map){
+            map.put(edt.getField(), edt.getText().toString());
         }
 
-        private static void getAutocompleteData(AutoCompleteTextViewPlus edt, JSONObject js) throws JSONException{
+        private static void getAutocompleteData(AutoCompleteTextViewPlus edt, Map<String, Object> map){
             if (edt.getAdapter() == null){
-                js.accumulate(edt.getField(), "null adapter");
+                map.put(edt.getField(), "null adapter");
             }else{
                 autocompletesModels m = edt.getSelectedModel();
 
                 if (m != null){
-                    js.accumulate(edt.getField(), m.getId());
-                    js.accumulate(edt.getField()+"_value", m.getDescription());
+                    map.put(edt.getField(), m.getId());
+                    map.put(edt.getField()+"_value", m.getDescription());
                 }else {
-                    js.accumulate(edt.getField(), "Invalid selection");
+                    map.put(edt.getField(), "Invalid selection");
                 }
             }
         }
 
-        private static void getTextViewPlusData(TextViewPlus tv, JSONObject js) throws JSONException{
-            js.accumulate(tv.getField(), tv.getText().toString());
+        private static void getTextViewPlusData(TextViewPlus tv, Map<String, Object> map){
+            map.put(tv.getField(), tv.getText().toString());
         }
 
-        private static void getSpinnerData(SpinnerPlus spn, JSONObject js) throws JSONException{
+        private static void getSpinnerData(SpinnerPlus spn, Map<String, Object> map){
             if (spn.getAdapter() == null){
-                js.accumulate(spn.getField(), "null adapter");
+                map.put(spn.getField(), "null adapter");
             }else {
                 spinnersModels m = spn.getModel();
                 if (m != null) {
-                    js.accumulate(spn.getField(), m.getId());
+                    map.put(spn.getField(), m.getId());
                 } else {
-                    js.accumulate(spn.getField(), "undefined");
+                    map.put(spn.getField(), "undefined");
                 }
             }
         }
 
-        private static void getCheckBoxData(CheckBoxPlus box, JSONObject js) throws JSONException{
-            js.accumulate(box.getField(), box.isChecked());
+        private static void getCheckBoxData(CheckBoxPlus box, Map<String, Object> map){
+            map.put(box.getField(), box.isChecked());
         }
 
-        private static void getSwitchData(SwitchPlus sw, JSONObject js) throws JSONException{
-            js.accumulate(sw.getField(), sw.isChecked());
+        private static void getSwitchData(SwitchPlus sw, Map<String, Object> map){
+            map.put(sw.getField(), sw.isChecked());
         }
 
-        private static void getRadioGroupData(RadioGroupPlus rdg, JSONObject js) throws JSONException{
-            js.accumulate(rdg.getField(), rdg.getValueOfCheckedRadioButton());
+        private static void getRadioGroupData(RadioGroupPlus rdg, Map<String, Object> map){
+            map.put(rdg.getField(), rdg.getValueOfCheckedRadioButton());
         }
     }
 

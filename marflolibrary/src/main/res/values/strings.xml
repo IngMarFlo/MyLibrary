@@ -76,4 +76,6 @@
     <string name="OPEN">Abrir</string>
     <string name="DOWNLOAD">Descargar</string>
     <string name="dialog_downloader_message">El archivo que quiere descargar ya se ha descargado anteriormente, ¿Qué desea hacer?</string>
+    <string name="tomar_foto_title_no_app">Inaccesible</string>
+    <string name="tomar_foto_message_no_app">No hay acceso a la cámara</string>
 </resources>

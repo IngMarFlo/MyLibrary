@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -48,24 +48,25 @@ public class getCamera {
             if (androidPermits.verificarPermiso(context, AndroidRuntimePermits.WRITE_EXTERNAL_STORAGE)){
 
                 Intent data = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                Uri fileUri = getOutputMediaFileUri(context, photoName);
+                Uri fileUri = FilesUtils.getUriFromProvider(context, getOutputMediaFile(context, photoName), provider);
                 data.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
                 data.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                Activity ac = (Activity)context;
-                ac.startActivityForResult(data,requestCode);
-
+                if (data.resolveActivity(context.getPackageManager()) != null) {
+                    Activity ac = (Activity) context;
+                    ac.startActivityForResult(data, requestCode);
+                }else{
+                    /*new PersonalDialog()
+                    .showDialog(
+                            context,
+                            context.getResources().getString(R.string.tomar_foto_title_no_app),
+                            context.getResources().getString(R.string.tomar_foto_message_no_app),
+                            PersonalDialog.ICON.WARNING,
+                            null);*/
+                    Toast.makeText(context,
+                            context.getResources().getString(R.string.tomar_foto_message_no_app),
+                            Toast.LENGTH_LONG).show();
+                }
             }
-        }
-    }
-
-    private Uri getOutputMediaFileUri(Context context, String photoName){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-            if (provider == null){
-                throw new RuntimeException("getCamera provider null");
-            }
-            return FilesUtils.getUriFromProvider(context, getOutputMediaFile(context, photoName), provider);
-        } else{
-            return Uri.fromFile(getOutputMediaFile(context, photoName));
         }
     }
 

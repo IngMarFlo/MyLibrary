@@ -71,6 +71,7 @@ public class FilesUtils {
         intent.setDataAndType(uri,getMimeType(file.getName()));
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         Intent chooser = Intent.createChooser(intent, context.getResources().getString(R.string.chooser_open_with));
         Activity activity = (Activity)context;
 

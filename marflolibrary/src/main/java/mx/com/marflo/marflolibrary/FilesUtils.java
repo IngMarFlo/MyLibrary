@@ -13,6 +13,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import java.io.File;
@@ -59,20 +60,22 @@ public class FilesUtils {
     }
 
     public static void visualizarArchivoConChooser(Context context, File file, int codeRequest, String provider){
-        Intent intent = new Intent(Intent.ACTION_VIEW);
 
-        Uri uri;
+        /*Uri uri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
             uri = getUriFromProvider(context, file, provider);
         } else{
             uri = Uri.fromFile(file);
-        }
+        }*/
+		Uri uri = FileProvider.getUriForFile(context, provider, file);
 
-        intent.setDataAndType(uri,getMimeType(file.getName()));
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Intent chooser = Intent.createChooser(intent, context.getResources().getString(R.string.chooser_open_with));
-        Activity activity = (Activity)context;
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setDataAndType(uri,context.getContentResolver().getType(uri));
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		Intent chooser = Intent.createChooser(intent, context.getResources().getString(R.string.chooser_open_with));
+		Activity activity = (Activity)context;
 
         try {
             activity.startActivityForResult(chooser,codeRequest);

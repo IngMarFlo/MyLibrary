@@ -3,7 +3,7 @@ package mx.com.marflo.marflolibrary;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.MediaStore;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -19,14 +19,14 @@ import mx.com.marflo.marflolibrary.permisos_android.androidPermits;
 public class getCamera {
 
     private File directory;
-    private String provider;
+    //private String provider;
 
     public getCamera(){}
 
-    public getCamera setProvider(String provider){
+    /*public getCamera setProvider(String provider){
         this.provider = provider;
         return this;
-    }
+    }*/
 
     public getCamera setDirectory(File directory){
         this.directory = directory;
@@ -48,14 +48,19 @@ public class getCamera {
 
                 File f = getOutputMediaFile(context, photoName);
 
-                Intent data = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                data.putExtra(MediaStore.EXTRA_OUTPUT, FilesUtils.getUriFromProvider(context, f, provider));
-                data.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-                if (data.resolveActivity(context.getPackageManager()) == null) {
-                    data = new Intent(context, CameraActivity.class);
-                    data.putExtra(CameraActivity.DESTINY, f);
+                if (f == null){
+                    Toast.makeText(context, context.getResources().getString(R.string.tomar_foto_file_null), Toast.LENGTH_LONG).show();
+                    return;
                 }
+
+                //Intent data = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //data.putExtra(MediaStore.EXTRA_OUTPUT, FilesUtils.getUriFromProvider(context, f, provider));
+                //data.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                //if (data.resolveActivity(context.getPackageManager()) == null) {
+                Intent data = new Intent(context, CameraActivity.class);
+                data.putExtra(CameraActivity.DESTINY, f);
+                //}
 
                 Activity ac = (Activity) context;
                 ac.startActivityForResult(data, requestCode);
@@ -75,6 +80,6 @@ public class getCamera {
             }
         }
 
-        return new File(directory.getPath()+File.separator+photoName);
+        return new File(directory, photoName);
     }
 }

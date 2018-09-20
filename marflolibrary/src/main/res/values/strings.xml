@@ -83,4 +83,7 @@
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
     <string name="btn_camera_basic_take_photo">Capturar</string>
     <string name="btn_camera_basic_try">Reintentar</string>
+    <string name="camera_basic_no_data_title">Sin data</string>
+    <string name="camera_basic_no_data_message">No se recibió el objeto File de destino para la imágen</string>
+    <string name="tomar_foto_file_null">No se pudo crear el directorio</string>
 </resources>

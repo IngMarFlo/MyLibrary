@@ -21,9 +21,10 @@ public class CameraActivity extends AppCompatActivity {
         if (getIntent().getExtras() == null){
             new PersonalDialog().showDialog(
                     this,
-                    "Sin data",
-                    "No se recibió el objeto File de destino para la imágen",
-                    PersonalDialog.ICON.WARNING, new PersonalDialog.Callback() {
+                    getResources().getString(R.string.camera_basic_no_data_title),
+                    getResources().getString(R.string.camera_basic_no_data_message),
+                    PersonalDialog.ICON.WARNING,
+                    new PersonalDialog.Callback() {
                         @Override
                         public void onPositiveClick(AlertDialog alertDialog) {
                             alertDialog.dismiss();

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="camera_basic_accept_button">#cc53bf49</color>
+    <color name="camera_basic_cancel_button">#ccbf4f49</color>
+</resources>

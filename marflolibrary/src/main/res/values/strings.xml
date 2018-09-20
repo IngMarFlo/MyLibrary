@@ -78,4 +78,9 @@
     <string name="dialog_downloader_message">El archivo que quiere descargar ya se ha descargado anteriormente, ¿Qué desea hacer?</string>
     <string name="tomar_foto_title_no_app">Inaccesible</string>
     <string name="tomar_foto_message_no_app">No hay acceso a la cámara</string>
+
+    <string name="request_permission">This sample needs camera permission.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="btn_camera_basic_take_photo">Capturar</string>
+    <string name="btn_camera_basic_try">Reintentar</string>
 </resources>

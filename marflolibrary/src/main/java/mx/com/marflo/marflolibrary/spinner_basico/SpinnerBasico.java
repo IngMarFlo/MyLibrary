@@ -23,6 +23,15 @@ public class SpinnerBasico extends SpinnerPlus {
         data = new ArrayList<>();
     }
 
+    public SpinnerBasico(Context c, String field, String invalidMesage, boolean obligatorio){
+        super(c, field, invalidMesage, obligatorio);
+        data = new ArrayList<>();
+    }
+
+    public ArrayList<spinnersModels> getData() {
+        return data;
+    }
+
     public void clearData(){
         data.clear();
     }

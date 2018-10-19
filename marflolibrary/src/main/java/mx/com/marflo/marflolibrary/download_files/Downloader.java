@@ -20,7 +20,7 @@ public class Downloader implements DownloadFileCallback{
 
     private Context context;
     private DownloadFileCallback callback;
-    private boolean showDialog;
+    private boolean showDialog, validateExist;
     private File dest, file;
     private String URL;
 
@@ -28,16 +28,18 @@ public class Downloader implements DownloadFileCallback{
      * Constructor de la clase, para correr la descarga debe usar el método {@link #run()}
      * @param context       Contexto que llama a la clase
      * @param showDialog    Indicador para mostrar o no el cuadro de descarga
+     * @param validateExist Indicador para verificar que el archivo exista en el dispositivo antes de descargar
      * @param URL           Dirección del archivo a descargar, debe contener el nombre del archivo así como su extensión
      * @param dest          Directorio de destino en el dispositivo, en caso que el parámetro sea nulo se guarda en el cache
      * @param callback      Interfaz de comunicación con la clase
      */
-    public Downloader(Context context, boolean showDialog, String URL, @Nullable File dest, DownloadFileCallback callback){
+    public Downloader(Context context, boolean showDialog, boolean validateExist, String URL, @Nullable File dest, DownloadFileCallback callback){
         this.callback   = callback;
         this.context    = context;
         this.dest       = (dest == null) ? context.getCacheDir() : dest;
         this.URL        = URL;
         this.showDialog = showDialog;
+        this.validateExist= validateExist;
     }
 
     /**
@@ -45,13 +47,16 @@ public class Downloader implements DownloadFileCallback{
      */
     public void run(){
         if (androidPermits.verificarPermiso(context, AndroidRuntimePermits.WRITE_EXTERNAL_STORAGE)){
-            file = new File(dest, DownloadFile.getFileName(URL));
-            if (file.exists()){
-                fileExistDialog();
+            if (validateExist) {
+                file = new File(dest, DownloadFile.getFileName(URL));
+                if (file.exists()) {
+                    fileExistDialog();
+                } else {
+                    download();
+                }
             }else{
                 download();
             }
-
         }
     }
 

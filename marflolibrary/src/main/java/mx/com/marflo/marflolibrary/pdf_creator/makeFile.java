@@ -9,7 +9,7 @@ import java.io.IOException;
 
 /**
  * @author Alejandro Martínez Flores
- * @version 1
+ * @version : 1
  * @since 28/08/2018
  */
 class makeFile extends AsyncTask<String, Integer, File> {

@@ -1,9 +1,9 @@
 package mx.com.marflo.marflolibrary.spinner_adapter;
 
 /**
- * Autor:        Ing Alejandro Martínez Flores
- * Fecha:        06/07/2018
- * Descripción:
+ * @author :        Ing Alejandro Martínez Flores
+ * @since :        06/07/2018
+ * @version : 1
  */
 interface spinnersInterface {
     int getId();

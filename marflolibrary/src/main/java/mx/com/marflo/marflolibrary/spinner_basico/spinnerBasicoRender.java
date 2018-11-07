@@ -5,7 +5,7 @@ import mx.com.marflo.marflolibrary.common_interfaces.finderCommon;
 import mx.com.marflo.marflolibrary.spinner_adapter.SpinnerRenderTemplate;
 
 /**
- * @version 1
+ * @version : 1
  * @author Ing Alejandro Martínez Flores
  * @since 09/08/2018
  */

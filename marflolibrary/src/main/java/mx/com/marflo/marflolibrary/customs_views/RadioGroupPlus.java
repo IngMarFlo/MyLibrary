@@ -7,7 +7,7 @@ import android.widget.RadioGroup;
 import mx.com.marflo.marflolibrary.R;
 
 /**
- * @version 1
+ * @version : 1
  * @author Ing Alejandro Martínez Flores
  * @since 09/07/2018
  */

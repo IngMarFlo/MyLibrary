@@ -11,7 +11,7 @@ import mx.com.marflo.marflolibrary.customs_views.AutoCompleteTextViewPlus;
 
 /**
  * @author Alejandro Martínez Flores
- * @version 1
+ * @version : 1
  * @since 28/08/2018
  */
 public class AutocompleteBasico extends AutoCompleteTextViewPlus {

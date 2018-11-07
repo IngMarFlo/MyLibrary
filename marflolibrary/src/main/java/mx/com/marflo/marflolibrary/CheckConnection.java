@@ -7,7 +7,7 @@ import android.net.NetworkInfo;
 import android.support.annotation.RequiresPermission;
 
 /**
- * @version 1
+ * @version : 1
  * @author Ing Alejandro Martínez Flores
  * @since 13/08/2018
  */

@@ -6,7 +6,7 @@ import mx.com.marflo.marflolibrary.common_interfaces.finderCommon;
 
 /**
  * @author Alejandro Martínez Flores
- * @version 1
+ * @version : 1
  * @since 28/08/2018
  */
 public class autocompleteBasicoRender extends AutocompleteRenderTemplate<autocompleteBasicoModel> {

@@ -26,8 +26,8 @@ import mx.com.marflo.marflolibrary.spinner_adapter.spinnersModels;
 /**
  * Clase para obtener los valores ingresados por el usuario en un formulario
  * @author  Alejandro Martínez Flores
- * @since   06 Julio 2018
- * @version 1
+ * @since   07 Noviembre 2018
+ * @version : 2
  */
 public class Form {
 

@@ -11,9 +11,9 @@ import mx.com.marflo.marflolibrary.PersonalDialog;
 import mx.com.marflo.marflolibrary.R;
 
 /**
- * Autor:        Ing Alejandro Martínez Flores
- * Fecha:        30/05/2018
- * Descripción:
+ * @author :        Ing Alejandro Martínez Flores
+ * @since :        30/05/2018
+ * @version : 1
  */
 public class androidPermits {
 

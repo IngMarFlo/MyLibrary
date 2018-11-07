@@ -19,4 +19,10 @@ public interface RcvPresenter {
 	 * Método para detener el SwipeRefreshLayout y ocultar el TextView
 	 */
 	void stopRefresh();
+
+	/**
+	 * Método para mostrar un mensaje tipo {@link android.widget.Toast}
+	 * @param text	Mensaje a mostrar
+	 */
+	void showToastOnItemClick(String text);
 }

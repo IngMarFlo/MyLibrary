@@ -27,7 +27,7 @@ import java.util.Locale;
  *
  * @author   Ing Alejandro Martínez Flores
  * @since   09/07/2018
- * @version 1
+ * @version : 1
  */
 public class utils {
 
@@ -54,9 +54,9 @@ public class utils {
     }
 
     /**
-     * Devuelve la diferencia de tiempo (dependiende de fc) entre dos fechas
-     * @param fi    Fecha inicial
-     * @param ff    Fecha final
+     * Devuelve la diferencia de tiempo (dependiende de fc) entre dos @since s
+     * @param fi    @since  inicial
+     * @param ff    @since  final
      * @param fc    Factor de tiempo
      * @return Diferencia de tiempo
      */

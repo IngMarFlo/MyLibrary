@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import mx.com.marflo.marflolibrary.rcv.RecyclerViewAdapter;
 import mx.com.marflo.mylibrary.R;
@@ -54,6 +55,11 @@ public class ImplementRcv extends AppCompatActivity
 	public void stopRefresh() {
 		swipe.setRefreshing(false);
 		tv.setVisibility(View.GONE);
+	}
+
+	@Override
+	public void showToastOnItemClick(String text) {
+		Toast.makeText(this, text, Toast.LENGTH_LONG).show();
 	}
 
 	@Override

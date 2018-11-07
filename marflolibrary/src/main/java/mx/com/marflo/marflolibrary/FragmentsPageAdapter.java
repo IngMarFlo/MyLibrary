@@ -7,9 +7,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 
 /**
- * Autor:        Ing Alejandro Martínez Flores
- * Fecha:        10/01/2018
- * Descripción:
+ * @author :        Ing Alejandro Martínez Flores
+ * @since :        10/01/2018
+ * @version : 1
  */
 
 public class FragmentsPageAdapter extends FragmentPagerAdapter {

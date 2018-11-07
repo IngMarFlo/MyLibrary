@@ -10,9 +10,9 @@ import android.widget.TextView;
 import mx.com.marflo.marflolibrary.utils;
 
 /**
- * Autor:        Ing Alejandro Martínez Flores
- * Fecha:        06/07/2018
- * Descripción:
+ * @author :        Ing Alejandro Martínez Flores
+ * @since :        06/07/2018
+ * @version : 1
  */
 public class FinderCommonImplement implements finderCommon {
     private final SparseArray<View> mCachedViews = new SparseArray<>();

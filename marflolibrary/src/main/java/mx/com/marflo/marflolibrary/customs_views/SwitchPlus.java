@@ -6,7 +6,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 /**
- * @version 1
+ * @version : 1
  * @author Ing Alejandro Martínez Flores
  * @since 09/07/2018
  */

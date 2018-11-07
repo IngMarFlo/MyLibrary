@@ -8,7 +8,7 @@ import mx.com.marflo.marflolibrary.common_interfaces.FinderCommonImplement;
 import mx.com.marflo.marflolibrary.common_interfaces.finderCommon;
 
 /**
- * @version 1
+ * @version : 1
  * @author Ing Alejandro Martínez Flores
  * @since 09/07/2018
  */

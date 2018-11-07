@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import mx.com.marflo.marflolibrary.common_class.dataModels;
 import mx.com.marflo.marflolibrary.rcv.RecyclerViewAdapter;
+import mx.com.marflo.marflolibrary.rcv.ViewHolderCallback;
 import mx.com.marflo.marflolibrary.rcv.ViewHolderTemplate;
 import mx.com.marflo.marflolibrary.rcv.finder;
 import mx.com.marflo.marflolibrary.rcv.swipe_and_drag.SwipeDragCallback;
@@ -23,7 +24,7 @@ import mx.com.marflo.mylibrary.R;
  * @since :	06/11/2018
  * @version : 1
  */
-class RcvCtrl implements SwipeDragCallback {
+class RcvCtrl {
 	private RcvPresenter presenter;
 	private RecyclerViewAdapter adapter;
 	private Context context;
@@ -37,7 +38,17 @@ class RcvCtrl implements SwipeDragCallback {
 	void init(){
 		adapter = new RecyclerViewAdapter();
 
-		adapter.registerRender(new RcvRender());
+		adapter.registerRender(new RcvRender(new ViewHolderCallback<RcvModel>() {
+			@Override
+			public void onItemClick(RcvModel model) {
+				presenter.showToastOnItemClick(model.getItem());
+			}
+
+			@Override
+			public void onItemLongClick(RcvModel model) {
+				presenter.showToastOnItemClick("Long click on "+model.getItem());
+			}
+		}));
 		adapter.registerRender(new LastItemRender());
 
 		presenter.setAdapter(adapter);
@@ -58,28 +69,26 @@ class RcvCtrl implements SwipeDragCallback {
 	}
 
 	void setSwipeDrag(RecyclerView rcv){
+		SwipeDragRecyclerView swipeDrag = new SwipeDragRecyclerView(
+				true,
+				ItemTouchHelper.RIGHT,
+				new SwipeDragCallback() {
+					@Override
+					public void onItemMove(int fromPosition, int toPosition) {
+						adapter.onItemMove(fromPosition, toPosition);
+					}
 
-		final SwipeDragRecyclerView swipeDrag = new SwipeDragRecyclerView(this, false, true);
+					@Override
+					public void onItemSwipe(int position, int direction) {
+						if (direction == ItemTouchHelper.LEFT) {
+							adapter.onItemDismiss(position);
+						}else{
+							adapter.notifyDataSetChanged();
+						}
+					}
+				});
 		ItemTouchHelper helper = new ItemTouchHelper(swipeDrag);
-
 		helper.attachToRecyclerView(rcv);
-
-		rcv.addItemDecoration(new RecyclerView.ItemDecoration() {
-			@Override
-			public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-				swipeDrag.onDraw(c);
-			}
-		});
-	}
-
-	@Override
-	public void onItemMove(int fromPosition, int toPosition) {
-		adapter.onItemMove(fromPosition, toPosition);
-	}
-
-	@Override
-	public void onItemSwipe(int position, int direction) {
-		adapter.onItemDismiss(position);
 	}
 
 	private class LastItemRender extends ViewHolderTemplate<LastItemModel>{

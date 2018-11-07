@@ -15,7 +15,7 @@ import mx.com.marflo.marflolibrary.progress_bar_view.ProgressBarMannager;
 
 /**
  * @author Alejandro Martínez Flores
- * @version 1
+ * @version : 1
  * @since 28/08/2018
  */
 class DownloadFile extends AsyncTask<String, Long, File>{

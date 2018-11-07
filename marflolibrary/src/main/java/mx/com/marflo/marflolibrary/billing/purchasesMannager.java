@@ -36,7 +36,7 @@ import static android.app.Activity.RESULT_OK;
 
 /**
  * Clase que se encarga de realizar la compra de productos en la Play Store
- * @version 1
+ * @version : 1
  * @author  Ing Alejandro Martínez Flores
  * @since   15/08/2018
  */

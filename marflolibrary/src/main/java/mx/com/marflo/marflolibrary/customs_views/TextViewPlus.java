@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 /**
  * @author Ing Alejandro Martínez Flores
  * @since 09/07/2018
- * @version 1
+ * @version : 1
  */
 public class TextViewPlus extends AppCompatTextView implements customView{
 

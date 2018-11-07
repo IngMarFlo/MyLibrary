@@ -24,7 +24,7 @@ import mx.com.marflo.marflolibrary.R;
 import mx.com.marflo.marflolibrary.progress_bar_view.ProgressBarMannager;
 
 /**
- * @version 1
+ * @version : 1
  * @author Ing Alejandro Martínez Flores
  * @since 02/08/2018
  */

@@ -4,9 +4,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * Autor:        Ing Alejandro Martínez Flores
- * Fecha:        02/05/2018
- * Descripción:
+ * @author :        Ing Alejandro Martínez Flores
+ * @since :        02/05/2018
+ * @version : 1
  */
 
 public class VH extends RecyclerView.ViewHolder {

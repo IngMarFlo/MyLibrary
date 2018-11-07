@@ -13,7 +13,7 @@ import mx.com.marflo.marflolibrary.permisos_android.androidPermits;
 
 /**
  * @author Alejandro Martínez Flores
- * @version 1
+ * @version : 1
  * @since 29/08/2018
  */
 public class Downloader implements DownloadFileCallback{

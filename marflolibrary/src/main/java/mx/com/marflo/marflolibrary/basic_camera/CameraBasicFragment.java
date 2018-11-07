@@ -61,7 +61,7 @@ import mx.com.marflo.marflolibrary.R;
 
 /**
  * @author Alejandro Martínez Flores
- * @version 1
+ * @version : 1
  * @since 20/09/2018
  */
 public class CameraBasicFragment extends Fragment implements

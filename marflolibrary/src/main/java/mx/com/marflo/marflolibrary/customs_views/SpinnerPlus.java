@@ -10,7 +10,7 @@ import mx.com.marflo.marflolibrary.spinner_adapter.SpinnerAdapter;
 import mx.com.marflo.marflolibrary.spinner_adapter.spinnersModels;
 
 /**
- * @version 1
+ * @version : 1
  * @author   Ing Alejandro Martínez Flores
  * @since   09/07/2018
  */

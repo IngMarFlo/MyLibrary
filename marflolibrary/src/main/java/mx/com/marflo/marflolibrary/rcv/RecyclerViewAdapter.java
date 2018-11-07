@@ -13,9 +13,9 @@ import java.util.Collections;
 import mx.com.marflo.marflolibrary.common_class.dataModels;
 
 /**
- * Autor:        Ing Alejandro Martínez Flores
- * Fecha:        02/05/2018
- * Descripción:
+ * @author :        Ing Alejandro Martínez Flores
+ * @since :        02/05/2018
+ * @version : 1
  */
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<VH>{
@@ -106,10 +106,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<VH>{
     }
     public ArrayList<dataModels> getData(){
         return data;
-    }
-
-    public static View inflate(int resourceId, ViewGroup parent){
-        return LayoutInflater.from(parent.getContext()).inflate(resourceId, parent, false);
     }
 
     public void registerRender(Render r){

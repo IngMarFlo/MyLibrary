@@ -9,7 +9,7 @@ import mx.com.marflo.marflolibrary.common_interfaces.finderCommon;
 
 /**
  * @author Alejandro Martínez Flores
- * @version 1
+ * @version : 1
  * @since 07 Julio 2018
  * @param <M> Clase que debe extender de spinnersModels
  */

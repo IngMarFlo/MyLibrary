@@ -9,7 +9,7 @@ import android.view.View;
 
 /**
  * Clase que crea un cuadro de diálogo de una forma más compacta
- * @version 1
+ * @version : 1
  * @author Ing Alejandro Martínez Flores
  * @since 11/08/2018
  */

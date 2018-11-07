@@ -5,7 +5,7 @@ import android.support.v7.widget.AppCompatRadioButton;
 import android.util.AttributeSet;
 
 /**
- * @version 1
+ * @version : 1
  * @author Ing Alejandro Martínez Flores
  * @since 09/07/2018
  */

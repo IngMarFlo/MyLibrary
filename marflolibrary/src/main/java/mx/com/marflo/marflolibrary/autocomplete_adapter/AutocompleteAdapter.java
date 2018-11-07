@@ -11,9 +11,9 @@ import android.widget.Filter;
 import java.util.ArrayList;
 
 /**
-* Autor:        Ing Alejandro Martínez Flores
-* Fecha:        22/12/2016
-* Descripción:
+* @author :        Ing Alejandro Martínez Flores
+* @since :        22/12/2016
+* @version : 1
 * Utilización:
 */
 

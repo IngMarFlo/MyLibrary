@@ -6,9 +6,9 @@ import java.lang.reflect.Type;
 import mx.com.marflo.marflolibrary.common_class.dataModels;
 
 /**
- * Autor:        Ing Alejandro Martínez Flores
- * Fecha:        02/05/2018
- * Descripción:
+ * @author :        Ing Alejandro Martínez Flores
+ * @since :        02/05/2018
+ * @version : 1
  */
 
 abstract class Render<M extends dataModels> {

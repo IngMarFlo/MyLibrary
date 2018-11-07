@@ -1,5 +1,6 @@
 package mx.com.marflo.mylibrary.impl_rcv;
 
+import mx.com.marflo.marflolibrary.rcv.ViewHolderCallback;
 import mx.com.marflo.marflolibrary.rcv.ViewHolderTemplate;
 import mx.com.marflo.marflolibrary.rcv.finder;
 import mx.com.marflo.mylibrary.R;
@@ -9,8 +10,8 @@ import mx.com.marflo.mylibrary.R;
  */
 public class RcvRender extends ViewHolderTemplate<RcvModel> {
 
-	RcvRender() {
-		super(RcvModel.class, R.layout.card_implement_rcv);
+	RcvRender(ViewHolderCallback<RcvModel> callback) {
+		super(RcvModel.class, R.layout.card_implement_rcv, callback);
 	}
 
 	@Override

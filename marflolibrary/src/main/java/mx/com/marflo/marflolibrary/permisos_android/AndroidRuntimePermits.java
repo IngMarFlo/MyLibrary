@@ -8,7 +8,7 @@ import mx.com.marflo.marflolibrary.R;
 /**
  * Enumeración con los permisos configurados
  * @author Alejandro Martínez Flores
- * @version 1
+ * @version : 1
  * @since 28/08/2018
  */
 public enum AndroidRuntimePermits{

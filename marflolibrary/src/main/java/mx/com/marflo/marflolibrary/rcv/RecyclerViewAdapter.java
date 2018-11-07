@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import mx.com.marflo.marflolibrary.common_class.dataModels;
 
@@ -118,7 +119,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<VH>{
             types.add(type);
             renders.add(r);
         }else{
-            throw new RuntimeException("Render already exist");
+            throw new RuntimeException("Render "+type+" already exist");
         }
+    }
+
+    public void onItemMove(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition){
+            for (int i = fromPosition; i < toPosition; i++){
+                Collections.swap(data, i, i+1);
+            }
+        }else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(data, i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    public void onItemDismiss(int position) {
+        data.remove(position);
+        notifyItemRemoved(position);
     }
 }

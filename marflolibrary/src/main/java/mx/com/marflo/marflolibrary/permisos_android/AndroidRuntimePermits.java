@@ -40,7 +40,7 @@ public enum AndroidRuntimePermits{
         return context.getResources().getString(messageResource);
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 }

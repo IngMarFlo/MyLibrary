@@ -1,15 +1,22 @@
 package mx.com.marflo.mylibrary;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import java.io.File;
 
 import mx.com.marflo.marflolibrary.FilesUtils;
 import mx.com.marflo.marflolibrary.basic_camera.CameraActivity;
 import mx.com.marflo.marflolibrary.getCamera;
+import mx.com.marflo.marflolibrary.permisos_android.AndroidRuntimePermits;
+import mx.com.marflo.marflolibrary.permisos_android.androidPermits;
+import mx.com.marflo.mylibrary.impl_rcv.ImplementRcv;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,21 +24,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        getCamera camera = new getCamera();
-        camera.setDirectory(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
-        camera.tomarFoto(this, "test.jpg", 0);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 0){
-            if (resultCode == RESULT_OK){
-                if (data.getExtras() != null) {
-                    File f = (File) data.getExtras().getSerializable(CameraActivity.RESULT);
-                    FilesUtils.visualizarArchivoConChooser(MainActivity.this, f, 1, "mx.com.marflo.mylibrary.provider");
-                }
-            }
-        }
-    }
+    public void onClickMain(View v){
+    	Intent i = null;
+    	switch (v.getId()){
+			case R.id.btnActivityMain_customViews:
+				break;
+
+			case R.id.btnActivityMain_rcvImpl:
+				i = new Intent(this, ImplementRcv.class);
+				break;
+		}
+
+		if (i != null){
+			startActivity(i);
+		}
+	}
 }

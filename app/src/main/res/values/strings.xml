@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MyLibrary</string>
+    <string name="btnActivityMain_rcvImpl">Recycler View Adapter</string>
+    <string name="btnActivityMain_customViews">Custom Views</string>
+    <string name="activity_title_rcv_adapter">RecyclerViewAdapter</string>
+    <string name="tvImplementRcv">Deslice hacia abajo</string>
+    <string name="implement_rcv_item">Item</string>
 </resources>

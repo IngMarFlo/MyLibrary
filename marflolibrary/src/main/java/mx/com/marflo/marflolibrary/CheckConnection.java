@@ -1,8 +1,10 @@
 package mx.com.marflo.marflolibrary;
 
+import android.Manifest;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.RequiresPermission;
 
 /**
  * @version 1
@@ -16,9 +18,13 @@ public class CheckConnection {
      * @param context   Contexto que llama al método
      * @return          Valor boleano con la validación
      */
+
+    @RequiresPermission (Manifest.permission.ACCESS_NETWORK_STATE)
     public static boolean conexionEstablecida(Context context){
         return conectadoPorDatos(context) || conectadoPorWiFi(context);
     }
+
+    @RequiresPermission (Manifest.permission.ACCESS_NETWORK_STATE)
     private static boolean conectadoPorDatos(Context context){
         ConnectivityManager connectivity = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -31,7 +37,9 @@ public class CheckConnection {
 
         return false;
     }
-    private static boolean conectadoPorWiFi(Context context){
+
+	@RequiresPermission (Manifest.permission.ACCESS_NETWORK_STATE)
+	private static boolean conectadoPorWiFi(Context context){
         ConnectivityManager connectivity = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         if (connectivity != null){

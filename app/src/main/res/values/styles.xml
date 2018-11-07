@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MyButton" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorControlHighlight</item>
+        <item name="buttonStyle">@style/Base.Widget.AppCompat.Button.Borderless</item>
+    </style>
+
+    <style name="MyButtonNormal" parent="Theme.AppCompat.Light">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_rowWeight">1</item>
+    </style>
+
 </resources>

@@ -53,7 +53,7 @@ public class SpinnerPlus extends android.support.v7.widget.AppCompatSpinner impl
         }
     }
 
-    public void setSelectIdRef(String idRef){
+    public void setSelectId(String idRef){
         SpinnerAdapter ad = (SpinnerAdapter) getAdapter();
         if (ad != null) {
             int pos = ad.getPositionByReference(idRef);

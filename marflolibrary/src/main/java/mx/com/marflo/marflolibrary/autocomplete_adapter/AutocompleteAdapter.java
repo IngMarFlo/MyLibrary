@@ -43,6 +43,15 @@ public class AutocompleteAdapter extends ArrayAdapter<autocompletesModels> {
         return null;
     }
 
+    public autocompletesModels getModelById(String referenceId){
+        for (autocompletesModels m : data){
+            if (m.getReferenceId().equals(referenceId)){
+                return m;
+            }
+        }
+        return null;
+    }
+
     @Override
     public int getCount() {
         return filtro.size();

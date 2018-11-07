@@ -1,11 +1,14 @@
 package mx.com.marflo.marflolibrary;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.RequiresPermission;
 import android.widget.Toast;
 
 import java.io.File;
+import java.security.acl.Permission;
 
 import mx.com.marflo.marflolibrary.basic_camera.CameraActivity;
 import mx.com.marflo.marflolibrary.permisos_android.AndroidRuntimePermits;
@@ -41,6 +44,7 @@ public class getCamera {
         }
     }
 
+    @RequiresPermission(allOf = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public void tomarFoto(Context context, String photoName, int requestCode) {
 
         if (androidPermits.verificarPermiso(context, AndroidRuntimePermits.CAMERA)){

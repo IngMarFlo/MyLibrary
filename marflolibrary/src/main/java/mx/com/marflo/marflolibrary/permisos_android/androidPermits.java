@@ -32,7 +32,7 @@ public class androidPermits {
         }
     }
 
-    private static void solicitarPermiso(Activity activity, AndroidRuntimePermits permiso){
+    public static void solicitarPermiso(Activity activity, AndroidRuntimePermits permiso){
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permiso.getName())){
             mostrarDialogo(activity, permiso);
         }else{

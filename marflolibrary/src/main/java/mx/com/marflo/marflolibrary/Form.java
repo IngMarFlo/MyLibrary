@@ -76,7 +76,11 @@ public class Form {
                 }
 
                 if (v instanceof AutoCompleteTextViewPlus){
-                    set.AutoCompleteTextView((AutoCompleteTextViewPlus) v, js.getInt(k));
+                    try{
+                        set.AutoCompleteTextView((AutoCompleteTextViewPlus) v, Integer.parseInt(js.getString(k)));
+                    }catch (NumberFormatException e){
+                        set.AutoCompleteTextView((AutoCompleteTextViewPlus) v, js.getString(k));
+                    }
                 }
 
                 if (v instanceof CheckBoxPlus){
@@ -92,7 +96,11 @@ public class Form {
                 }
 
                 if (v instanceof SpinnerPlus){
-                    set.Spinner((SpinnerPlus) v, js.getInt(k));
+                    try{
+                        set.Spinner((SpinnerPlus) v, Integer.parseInt(js.getString(k)));
+                    }catch (NumberFormatException e){
+                        set.Spinner((SpinnerPlus) v, js.getString(k));
+                    }
                 }
 
                 if (v instanceof TextViewPlus){
@@ -253,7 +261,7 @@ public class Form {
                 autocompletesModels m = edt.getSelectedModel();
 
                 if (m != null){
-                    map.put(edt.getField(), m.getId());
+                    map.put(edt.getField(),(m.getReferenceId() == null) ? m.getId() : m.getReferenceId());
                     map.put(edt.getField()+"_value", m.getDescription());
                 }else {
                     map.put(edt.getField(), "Invalid selection");
@@ -271,7 +279,7 @@ public class Form {
             }else {
                 spinnersModels m = spn.getModel();
                 if (m != null) {
-                    map.put(spn.getField(), m.getId());
+                    map.put(spn.getField(), (m.getIdRef() == null) ? m.getId() : m.getIdRef());
                 } else {
                     map.put(spn.getField(), "undefined");
                 }
@@ -389,7 +397,15 @@ public class Form {
             edt.setTextById(id);
         }
 
+        static void AutoCompleteTextView(AutoCompleteTextViewPlus edt, String referenceId){
+            edt.setTextById(referenceId);
+        }
+
         static void Spinner(SpinnerPlus spn, int id){
+            spn.setSelectId(id);
+        }
+
+        static void Spinner(SpinnerPlus spn, String id){
             spn.setSelectId(id);
         }
 

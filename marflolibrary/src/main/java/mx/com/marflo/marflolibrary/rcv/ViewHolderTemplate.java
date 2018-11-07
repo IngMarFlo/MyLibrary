@@ -13,7 +13,7 @@ import mx.com.marflo.marflolibrary.common_class.dataModels;
 public abstract class ViewHolderTemplate<M extends dataModels> extends Render<M>{
     private int resId;
 
-    public ViewHolderTemplate(Class type, int resId) {
+    public ViewHolderTemplate(Class<M> type, int resId) {
         super(type);
         this.resId = resId;
     }

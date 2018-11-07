@@ -64,6 +64,10 @@ public class AutoCompleteTextViewPlus extends android.support.v7.widget.AppCompa
         return model;
     }
 
+    public boolean isValid(){
+        return model != null;
+    }
+
     public void setTextById(int id){
         AutocompleteAdapter ad = (AutocompleteAdapter) getAdapter();
         autocompletesModels m = ad.getModelById(id);
@@ -73,6 +77,16 @@ public class AutoCompleteTextViewPlus extends android.support.v7.widget.AppCompa
             model = m;
         }
     }
+
+    public void setTextById(String referenceId){
+		AutocompleteAdapter ad = (AutocompleteAdapter) getAdapter();
+		autocompletesModels m = ad.getModelById(referenceId);
+		if (m != null){
+			edt.setText(m.getDescription());
+			edt.setSelection(m.getDescription().length());
+			model = m;
+		}
+	}
 
     @Override
     public String getField() {

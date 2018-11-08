@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import mx.com.marflo.marflolibrary.progress_bar_view.CompleteProgressBar;
 import mx.com.marflo.marflolibrary.rcv.RecyclerViewAdapter;
 import mx.com.marflo.mylibrary.R;
 
@@ -20,6 +23,7 @@ public class ImplementRcv extends AppCompatActivity
 	private RecyclerView rcv;
 	private TextView tv;
 	private SwipeRefreshLayout swipe;
+	private CompleteProgressBar completeProgressBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +32,11 @@ public class ImplementRcv extends AppCompatActivity
 
 		swipe = findViewById(R.id.swipeImplementRcv);
 		swipe.setOnRefreshListener(this);
+		completeProgressBar = new CompleteProgressBar((FrameLayout) findViewById(R.id.frameImplementRcv));
+		completeProgressBar.init();
 
 		rcv = findViewById(R.id.rcvImplementRcv);
-		//rcv.setHasFixedSize(true);
+		rcv.setHasFixedSize(true);
 		rcv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
 		tv = findViewById(R.id.tvImplementRcv);
@@ -53,7 +59,10 @@ public class ImplementRcv extends AppCompatActivity
 
 	@Override
 	public void stopRefresh() {
-		swipe.setRefreshing(false);
+		//swipe.setRefreshing(false);
+		if (completeProgressBar.isShowing()) {
+			completeProgressBar.hide(getWindow());
+		}
 		tv.setVisibility(View.GONE);
 	}
 
@@ -64,7 +73,8 @@ public class ImplementRcv extends AppCompatActivity
 
 	@Override
 	public void onRefresh() {
-		swipe.setRefreshing(true);
+		swipe.setRefreshing(false);
+		completeProgressBar.show(getWindow());
 		ctrl.putData();
 	}
 }

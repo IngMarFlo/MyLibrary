@@ -2,4 +2,5 @@
 <resources>
     <color name="camera_basic_accept_button">#cc53bf49</color>
     <color name="camera_basic_cancel_button">#ccbf4f49</color>
+    <color name="complete_progress_bar_background">#80D3D3D3</color>
 </resources>

@@ -29,6 +29,13 @@
             style="@style/MyButtonNormal"
             android:onClick="onClickMain"/>
 
+        <Button
+            android:id="@+id/btnActivityMain_dynamicFeature"
+            android:text="@string/btnActivityMain_dynamicFeature"
+            android:theme="@style/MyButton"
+            style="@style/MyButtonNormal"
+            android:onClick="onClickMain"/>
+
     </GridLayout>
 
 </ScrollView>

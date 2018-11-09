@@ -14,6 +14,8 @@ import java.io.File;
 import mx.com.marflo.marflolibrary.FilesUtils;
 import mx.com.marflo.marflolibrary.basic_camera.CameraActivity;
 import mx.com.marflo.marflolibrary.getCamera;
+import mx.com.marflo.marflolibrary.modules_download_manager.MODULES;
+import mx.com.marflo.marflolibrary.modules_download_manager.modulesDownloadMannager;
 import mx.com.marflo.marflolibrary.permisos_android.AndroidRuntimePermits;
 import mx.com.marflo.marflolibrary.permisos_android.androidPermits;
 import mx.com.marflo.mylibrary.impl_rcv.ImplementRcv;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickMain(View v){
     	Intent i = null;
+    	modulesDownloadMannager mdm = null;
     	switch (v.getId()){
 			case R.id.btnActivityMain_customViews:
 				break;
@@ -35,10 +38,38 @@ public class MainActivity extends AppCompatActivity {
 			case R.id.btnActivityMain_rcvImpl:
 				i = new Intent(this, ImplementRcv.class);
 				break;
+
+			case R.id.btnActivityMain_dynamicFeature:
+				mdm = new modulesDownloadMannager(MODS.TEST, this);
+				break;
 		}
 
 		if (i != null){
 			startActivity(i);
+		}
+		if (mdm != null){
+			mdm.download();
+		}
+	}
+
+	private enum MODS implements MODULES {
+		TEST("dynamic_feature","mx.com.marflo.dynamic_feature.MainActivity");
+
+		private String name, activity;
+
+		MODS(String name, String activity){
+			this.name = name;
+			this.activity = activity;
+		}
+
+		@Override
+		public String getModuleName() {
+			return name;
+		}
+
+		@Override
+		public String getActivityName() {
+			return activity;
 		}
 	}
 }

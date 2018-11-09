@@ -60,7 +60,11 @@ public class SpinnerAdapter extends ArrayAdapter<spinnersModels>{
     }
 
     public boolean hasObligatoryItem(){
-        return data.get(0).getId() == -1 || (data.get(0).getIdRef() != null && data.get(0).getIdRef().equals("-1"));
+    	if (data.get(0).getId() == 0){
+			return data.get(0).getIdRef() != null && data.get(0).getIdRef().equals("-1");
+		}else {
+			return data.get(0).getId() == -1;
+		}
     }
 
     public spinnersModels getModel(int pos){

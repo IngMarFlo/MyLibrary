@@ -1,1 +1,1 @@
-include ':app', ':marflolibrary'
+include ':app', ':marflolibrary', ':dynamic_feature'

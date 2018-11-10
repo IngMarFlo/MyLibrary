@@ -60,6 +60,7 @@ public class ImageViewPlus extends android.support.v7.widget.AppCompatImageView 
 	public void setImagePath(String filePath){
 		this.path = filePath;
 		if (isValidPath()){
+			setTag(null);
 			if (isServerFile()){
 				//Se considera un archivo externo...
 				Glide.with(context)
@@ -99,6 +100,7 @@ public class ImageViewPlus extends android.support.v7.widget.AppCompatImageView 
 						}).into(this);
 			}
 		}
+		setTag(mannager.getField());
 	}
 
 	public String getPath(){

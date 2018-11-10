@@ -16,6 +16,7 @@ import mx.com.marflo.marflolibrary.autocomplete_adapter.autocompletesModels;
 import mx.com.marflo.marflolibrary.customs_views.AutoCompleteTextViewPlus;
 import mx.com.marflo.marflolibrary.customs_views.CheckBoxPlus;
 import mx.com.marflo.marflolibrary.customs_views.EditTextPlus;
+import mx.com.marflo.marflolibrary.customs_views.ImageViewPlus;
 import mx.com.marflo.marflolibrary.customs_views.RadioButtonPlus;
 import mx.com.marflo.marflolibrary.customs_views.RadioGroupPlus;
 import mx.com.marflo.marflolibrary.customs_views.SpinnerPlus;
@@ -70,6 +71,10 @@ public class Form {
             while (keys.hasNext()){
                 String  k = keys.next();
                 View    v = top.findViewWithTag(k);
+
+                if (v instanceof ImageViewPlus){
+                	set.ImageViewPlus((ImageViewPlus) v, js.getString(k));
+				}
 
                 if (v instanceof EditTextPlus){
                     set.EditText((EditTextPlus) v, js.getString(k));
@@ -131,6 +136,10 @@ public class Form {
         for (int i = 0; i < vg.getChildCount(); i++){
 
             View v = vg.getChildAt(i);
+
+            if (v instanceof  ImageViewPlus){
+				((ImageViewPlus) v).clear();
+			}
 
             if (v instanceof TextInputLayout){
                 clear.TextInputLayout((TextInputLayout) v);
@@ -222,6 +231,10 @@ public class Form {
                 }
             }
 
+            if (v instanceof ImageViewPlus){
+            	getData.getImageViewPlus((ImageViewPlus)v, js);
+			}
+
             if (v instanceof TextViewPlus){
                 getData.getTextViewPlusData((TextViewPlus) v, js);
             }
@@ -249,6 +262,13 @@ public class Form {
     }
 
     private static class getData{
+
+    	private static void getImageViewPlus(ImageViewPlus imv, Map<String, Object> map){
+    		map.put(imv.getField(), imv.getPath());
+    		if (imv.isValidPath()) {
+				map.put(imv.getField() + "_from_server", imv.isServerFile());
+			}
+		}
 
         private static void getEditTextData(EditTextPlus edt, Map<String, Object> map){
             map.put(edt.getField(), edt.getText().toString());
@@ -388,6 +408,10 @@ public class Form {
     }
 
     private static class set{
+
+    	static void ImageViewPlus(ImageViewPlus imv, String path){
+    		imv.setImagePath(path);
+		}
 
         static void EditText(EditTextPlus edt, String t){
             edt.setText(t);

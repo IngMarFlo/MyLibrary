@@ -10,7 +10,7 @@ import mx.com.marflo.marflolibrary.spinner_adapter.SpinnerRenderTemplate;
  * @since 09/08/2018
  */
 public class spinnerBasicoRender extends SpinnerRenderTemplate<spinnerBasicoModel> {
-    spinnerBasicoRender() {
+    public spinnerBasicoRender() {
         super(R.layout.card_spinner_basico);
     }
 
